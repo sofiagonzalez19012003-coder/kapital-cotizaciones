@@ -387,6 +387,101 @@ const CSS = `
   .ind-box { background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; padding: 18px; }
 `;
 
+// ─── COUNTUP COMPONENT ───────────────────────────────────────────────────────
+function CountUp({ target, duration = 1800, prefix = "", suffix = "" }) {
+  const [count, setCount] = useState(0);
+  const [started, setStarted] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && !started) setStarted(true);
+    }, { threshold: 0.5 });
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [started]);
+
+  useEffect(() => {
+    if (!started) return;
+    let start = 0;
+    const steps = 60;
+    const increment = target / steps;
+    const interval = setInterval(() => {
+      start += increment;
+      if (start >= target) { setCount(target); clearInterval(interval); }
+      else setCount(Math.floor(start));
+    }, duration / steps);
+    return () => clearInterval(interval);
+  }, [started, target, duration]);
+
+  return <span ref={ref}>{prefix}{count}{suffix}</span>;
+}
+
+// ─── ECOSYSTEM COMPONENT ──────────────────────────────────────────────────────
+function Ecosystem() {
+  const nodes = [
+    { id: 0, label: "KAPITAL", x: 50, y: 50, size: 52, color: "#590707", textSize: 8, center: true },
+    { id: 1, label: "Estudio", x: 50, y: 12, size: 36, color: "#7a0a0a", textSize: 9 },
+    { id: 2, label: "Legal", x: 82, y: 28, size: 32, color: "#6b0606", textSize: 9 },
+    { id: 3, label: "Marketing", x: 88, y: 62, size: 34, color: "#7a0a0a", textSize: 8 },
+    { id: 4, label: "Producción", x: 65, y: 88, size: 36, color: "#6b0606", textSize: 8 },
+    { id: 5, label: "Mezcla", x: 35, y: 88, size: 32, color: "#7a0a0a", textSize: 9 },
+    { id: 6, label: "Artista", x: 12, y: 62, size: 34, color: "#6b0606", textSize: 9 },
+    { id: 7, label: "Streaming", x: 18, y: 28, size: 30, color: "#5a0606", textSize: 8 },
+    { id: 8, label: "Fans", x: 50, y: 32, size: 24, color: "#440404", textSize: 8 },
+  ];
+  const edges = [[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[0,7],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,1],[1,8],[3,8],[5,8]];
+  const [pulse, setPulse] = useState(0);
+  useEffect(() => {
+    const iv = setInterval(() => setPulse(p => (p + 1) % edges.length), 300);
+    return () => clearInterval(iv);
+  }, []);
+
+  return (
+    <div style={{ position: "relative", width: "100%", paddingBottom: "100%", margin: "16px 0" }}>
+      <svg viewBox="0 0 100 100" style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}>
+        <defs>
+          <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#590707" stopOpacity="0.3" />
+            <stop offset="100%" stopColor="#000" stopOpacity="0" />
+          </radialGradient>
+          <filter id="blur-glow">
+            <feGaussianBlur stdDeviation="1.5" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <circle cx="50" cy="50" r="50" fill="url(#glow)" />
+        {edges.map(([a, b], i) => {
+          const na = nodes[a]; const nb = nodes[b];
+          const active = pulse % edges.length === i || (pulse + 1) % edges.length === i;
+          return (
+            <line key={i} x1={na.x} y1={na.y} x2={nb.x} y2={nb.y}
+              stroke={active ? "#ff4444" : "rgba(89,7,7,.35)"}
+              strokeWidth={active ? 0.6 : 0.3}
+              style={{ transition: "all .3s" }}
+            />
+          );
+        })}
+        {nodes.map((n, i) => (
+          <g key={i} style={{ cursor: "default" }}>
+            <circle cx={n.x} cy={n.y} r={n.size / 10} fill={n.color}
+              style={{ filter: n.center ? "drop-shadow(0 0 3px #ff4444)" : "drop-shadow(0 0 1px rgba(89,7,7,.8))" }}
+            />
+            {n.center && <circle cx={n.x} cy={n.y} r={n.size / 10 + 1.5} fill="none" stroke="rgba(89,7,7,.4)" strokeWidth="0.5">
+              <animate attributeName="r" values={`${n.size/10+1};${n.size/10+2.5};${n.size/10+1}`} dur="2s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0.6;0;0.6" dur="2s" repeatCount="indefinite"/>
+            </circle>}
+            <text x={n.x} y={n.y + (n.center ? 0.5 : 0.4)} textAnchor="middle" dominantBaseline="middle"
+              fontSize={n.textSize / 10} fill="#fff" fontWeight="800" fontFamily="Raleway,sans-serif"
+              letterSpacing="0.2"
+            >{n.label}</text>
+          </g>
+        ))}
+      </svg>
+    </div>
+  );
+}
+
 // ─── CAROUSEL 3D COMPONENT ───────────────────────────────────────────────────
 function Carousel3D({ imgs }) {
   const [current, setCurrent] = useState(0);
@@ -621,7 +716,7 @@ export default function App() {
       {/* NAV */}
       <nav className="nav">
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <img src={LOGO_URL} alt="Kapital Music" style={{ width: 64, height: 64, objectFit: "contain" }} onError={e=>{e.target.style.display='none';}} />
+          <img src={LOGO_URL} alt="Kapital Music" style={{ width: 80, height: 80, objectFit: "contain" }} onError={e=>{e.target.style.display='none';}} />
           <div>
             <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: 3, textTransform: "uppercase" }}>Kapital Music</div>
             <div style={{ fontSize: 8, color: "rgba(255,255,255,.3)", letterSpacing: 2 }}>SELLO INDEPENDIENTE</div>
@@ -648,10 +743,19 @@ export default function App() {
                 Somos el equipo que te acompaña a construir una carrera real — estrategia, producción y respaldo legal desde el día uno.
               </p>
               <div className="fu" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 28 }}>
-                {[{ n: "+50", l: "Artistas activos" }, { n: "+250", l: "Canciones producidas" }, { n: "15", l: "Años en el mercado" }, { n: "🌎", l: "Visibilidad internacional" }].map((s, i) => (
-                  <div key={i} style={{ background: "rgba(255,255,255,.05)", border: "1px solid rgba(255,255,255,.09)", borderRadius: 10, padding: "12px 8px", textAlign: "center" }}>
-                    <div style={{ fontWeight: 900, fontSize: 20, color: "#590707" }}>{s.n}</div>
-                    <div style={{ fontSize: 9, color: "rgba(255,255,255,.38)", letterSpacing: 1, marginTop: 3, textTransform: "uppercase" }}>{s.l}</div>
+                {[
+                  { target: 50, prefix: "+", suffix: "", l: "Artistas activos" },
+                  { target: 250, prefix: "+", suffix: "", l: "Canciones producidas" },
+                  { target: 15, prefix: "", suffix: "", l: "Años en el mercado" },
+                  { target: null, icon: "🌎", l: "Visibilidad internacional" },
+                ].map((s, i) => (
+                  <div key={i} style={{ background: "rgba(255,255,255,.05)", border: "1px solid rgba(255,255,255,.09)", borderRadius: 12, padding: "18px 8px", textAlign: "center" }}>
+                    <div style={{ fontWeight: 900, fontSize: 34, color: "#590707", lineHeight: 1 }}>
+                      {s.target !== null
+                        ? <CountUp target={s.target} prefix={s.prefix} suffix={s.suffix} />
+                        : s.icon}
+                    </div>
+                    <div style={{ fontSize: 10, color: "rgba(255,255,255,.38)", letterSpacing: 1, marginTop: 6, textTransform: "uppercase" }}>{s.l}</div>
                   </div>
                 ))}
               </div>
@@ -718,25 +822,23 @@ export default function App() {
 
           {/* POR QUÉ KAPITAL */}
           <div style={{ background: "rgba(89,7,7,.08)", borderTop: "1px solid rgba(89,7,7,.2)", borderBottom: "1px solid rgba(89,7,7,.2)", padding: `28px ${P}`, marginBottom: 0 }}>
-            <div className="tag" style={{ marginBottom: 14 }}>POR QUÉ KAPITAL</div>
-            <h2 style={{ fontSize: 20, fontWeight: 900, marginBottom: 22, textTransform: "uppercase", lineHeight: 1.1 }}>Lo que nos hace<br />diferentes</h2>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+            <div className="tag" style={{ marginBottom: 10 }}>POR QUÉ KAPITAL</div>
+            <h2 style={{ fontSize: 20, fontWeight: 900, marginBottom: 6, textTransform: "uppercase", lineHeight: 1.1 }}>Un ecosistema<br /><span style={{ color: "#590707" }}>completo para ti</span></h2>
+            <p style={{ fontSize: 13, color: "rgba(255,255,255,.5)", lineHeight: 1.65, marginBottom: 4 }}>
+              Kapital conecta todos los puntos de tu carrera. No eres un cliente más — eres el centro del movimiento.
+            </p>
+            <Ecosystem />
+            <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 8 }}>
               {[
-                { ico: "🏠", title: "Todo en un solo lugar", desc: "Studio, legal, marketing y producción. Un equipo, cero filas.", stat: "5 servicios", statLabel: "bajo un mismo techo" },
-                { ico: "📈", title: "Resultados reales", desc: "Más de 250 canciones producidas con artistas activos.", stat: "+250", statLabel: "canciones producidas" },
-                { ico: "🌎", title: "Alcance internacional", desc: "Artistas de toda Latinoamérica. Sesiones virtuales disponibles.", stat: "LATAM", statLabel: "presencia regional" },
-                { ico: "⚡", title: "Entrega rápida", desc: "Mezcla y master en 72h. Estrategia lista en la primera semana.", stat: "72h", statLabel: "entrega mezcla & master" },
-                { ico: "🤝", title: "Trato directo", desc: "Trabajas con el equipo real desde el primer día.", stat: "+50", statLabel: "artistas activos" },
-                { ico: "🏆", title: "15 años de experiencia", desc: "Una década y media construyendo carreras en la industria.", stat: "15", statLabel: "años en el mercado" },
+                { ico: "🏠", text: "Todo bajo un mismo techo — studio, legal, marketing y producción." },
+                { ico: "📈", text: "+250 canciones producidas con resultados reales y artistas activos." },
+                { ico: "⚡", text: "Mezcla y master en 72h. Estrategia lista desde la primera semana." },
+                { ico: "🌎", text: "Presencia en toda Latinoamérica. Sesiones virtuales disponibles." },
+                { ico: "🏆", text: "15 años construyendo carreras en la industria musical." },
               ].map((item, i) => (
-                <div key={i} style={{ background: "rgba(255,255,255,.04)", border: "1px solid rgba(255,255,255,.08)", borderRadius: 12, padding: "16px 14px", display: "flex", flexDirection: "column", gap: 8 }}>
-                  <div style={{ fontSize: 26 }}>{item.ico}</div>
-                  <div>
-                    <div style={{ fontSize: 22, fontWeight: 900, color: "#590707", lineHeight: 1 }}>{item.stat}</div>
-                    <div style={{ fontSize: 9, color: "rgba(255,255,255,.35)", letterSpacing: 1, textTransform: "uppercase", marginBottom: 6 }}>{item.statLabel}</div>
-                  </div>
-                  <div style={{ fontWeight: 800, fontSize: 12, marginBottom: 2 }}>{item.title}</div>
-                  <div style={{ fontSize: 11, color: "rgba(255,255,255,.5)", lineHeight: 1.5 }}>{item.desc}</div>
+                <div key={i} style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
+                  <span style={{ fontSize: 16, flexShrink: 0, marginTop: 1 }}>{item.ico}</span>
+                  <span style={{ fontSize: 13, color: "rgba(255,255,255,.65)", lineHeight: 1.55 }}>{item.text}</span>
                 </div>
               ))}
             </div>
