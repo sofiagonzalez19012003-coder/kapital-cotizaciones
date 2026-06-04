@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormStore } from '../store/useFormStore';
 import { PORTADAS_ROW1, PORTADAS_ROW2 } from '../utils/businessLogic';
 import CountUp from './CountUp';
@@ -16,156 +16,285 @@ function HudBracket() {
   );
 }
 
-
 export default function LandingView() {
   const { setPhase, setActiveSrv } = useFormStore();
+  const [openFaq, setOpenFaq] = useState(null);
 
+  const scrollToServices = () => {
+    document.getElementById('servicios')?.scrollIntoView({ behavior: 'smooth' });
+  };
 
+  const faqs = [
+    {
+      q: "¿Ofrecen revisiones en las producciones o mezclas?",
+      a: "Sí, todos nuestros servicios de producción y mezcla/máster incluyen hasta 3 rondas de revisiones completas para asegurar que el tema suene exactamente como lo imaginaste."
+    },
+    {
+      q: "¿Qué archivos recibo al finalizar mi proyecto?",
+      a: "Recibes el máster final en alta definición (.WAV de 24 bits y .MP3 de 320kbps), además de la pista instrumental, la pista a capela limpia y los stems (canales separados) si solicitas un paquete completo."
+    },
+    {
+      q: "¿Cuánto tiempo tarda la entrega de un trabajo?",
+      a: "El servicio de Mezcla & Mastering se entrega en 72 horas hábiles. Las producciones musicales completas toman de 1 a 2 semanas, coordinando las sesiones de grabación en nuestros estudios."
+    },
+    {
+      q: "¿En qué géneros musicales se especializan?",
+      a: "Nos especializamos en géneros urbanos y comerciales: Reggaetón, Trap, Rap, Hip-Hop, R&B, Afrobeats y Pop urbano. Contamos con productores e ingenieros experimentados en cada nicho."
+    },
+    {
+      q: "¿Cómo funciona el proceso de contratación?",
+      a: "Eliges tus servicios en este portal para ver tu cotización estimada. Luego, agendamos una videollamada para afinar detalles y establecer el cronograma. Iniciamos el trabajo con un depósito del 50%."
+    }
+  ];
 
   return (
-    <div className="w-full flex flex-col max-w-xl mx-auto gap-6 px-4 py-8 pointer-events-auto">
+    <div className="w-full flex flex-col max-w-6xl mx-auto gap-24 px-6 md:px-12 py-10 pointer-events-auto">
       
       {/* ──────────────── SECTION 1: HERO / CORE DASHBOARD ──────────────── */}
-      <section className="w-full animate-[fu_0.4s_ease-out]">
-        <div className="relative py-10 px-6 bg-black/70 backdrop-blur-md border border-white/10 shadow-[0_0_30px_rgba(89,7,7,0.25)] rounded-3xl w-full">
-          <HudBracket />
+      <section className="w-full text-center py-12 md:py-20 flex flex-col items-center justify-center animate-[fu_0.5s_ease-out] relative">
+        {/* Subtle ambient red background light */}
+        <div className="absolute w-[450px] h-[450px] rounded-full bg-red-950/15 blur-[120px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0 pointer-events-none" />
 
-          {/* Diagnostic Status Bar */}
-          <div className="flex justify-between items-center border-b border-white/10 pb-4 mb-8 text-[8px] font-mono tracking-widest text-white/50">
-            <div className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 bg-[#C0392B] rounded-full animate-ping" />
-              <span>PORTAL: ONLINE</span>
-            </div>
-            <div>ASESORÍA PERSONALIZADA</div>
-          </div>
-          
-          <div className="relative z-10 text-center flex flex-col items-center">
-            <span className="inline-block bg-[#590707]/30 border border-[#C0392B]/50 text-[#ff8080] text-[9px] font-mono tracking-[0.2em] px-4 py-1.5 rounded-md mb-6 uppercase">
-              BIENVENIDO AL MOVIMIENTO
-            </span>
-            
-            <h1 className="text-3xl sm:text-4xl font-black leading-[0.9] tracking-tighter uppercase text-white mb-6">
-              Tu música.<br />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#e63333] to-[#590707]">Tu legado.</span><br />
-              Tu momento.
-            </h1>
-            
-            <p className="text-xs text-white/55 leading-relaxed mb-8 max-w-md font-mono">
-              Somos el equipo que te acompaña a construir una carrera real — estrategia, producción y respaldo legal desde el día uno.
-            </p>
-
-            {/* Interactive Diagnostic Widget Grid */}
-            <div className="grid grid-cols-2 gap-4 w-full mb-8 text-left">
-              {[
-                { target: 50, prefix: "+", label: "Artistas activos", sub: "DIAGNÓSTICO_OK" },
-                { target: 250, prefix: "+", label: "Canciones producidas", sub: "MASTER_STREAM" },
-                { target: 15, prefix: "", label: "Años en el mercado", sub: "CAPITAL_ASSET" },
-                { target: null, widget: <span className="text-2xl">🌎</span>, label: "Visibilidad internacional", sub: "GLOBAL_PRESENCE" },
-              ].map((s, i) => (
-                <div key={i} className="relative bg-white/5 border border-white/10 rounded-2xl p-4 shadow-[inset_0_0_10px_rgba(255,255,255,0.02)]">
-                  <div className="absolute top-2 right-3 text-[7px] font-mono text-white/30 tracking-widest">{s.sub}</div>
-                  <div className="font-mono text-2xl font-black text-[#C0392B] leading-none mb-1.5">
-                    {s.target !== null ? (
-                      <CountUp target={s.target} prefix={s.prefix} />
-                    ) : (
-                      s.widget
-                    )}
-                  </div>
-                  <div className="text-[9px] font-mono font-bold text-white/40 uppercase tracking-widest leading-none mt-2">{s.label}</div>
-                </div>
-              ))}
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
-              <button 
-                onClick={() => setPhase('form')}
-                className="bg-gradient-to-r from-[#590707] to-[#8a0c0c] hover:from-[#8a0c0c] hover:to-[#C0392B] text-white font-extrabold uppercase tracking-wider py-4 px-8 rounded-xl shadow-[0_0_20px_rgba(192,57,43,0.4)] active:scale-95 transition-all duration-300 pointer-events-auto text-xs"
-              >
-                Quiero mi propuesta →
-              </button>
-              <div className="text-[9px] font-mono text-white/40 mt-4 sm:hidden flex items-center justify-center gap-1.5 animate-bounce">
-                <span>↓ Desliza para explorar</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-
-      {/* ──────────────── SECTION 2: HISTORY / LOG DIAGNOSTICS ──────────────── */}
-      <section className="w-full animate-[fu_0.5s_ease-out]">
-        <div className="relative py-10 px-6 bg-black/75 backdrop-blur-md border border-white/10 shadow-[0_0_30px_rgba(89,7,7,0.25)] rounded-3xl w-full pointer-events-auto">
-          <HudBracket />
-          
-          <div className="flex flex-col gap-4">
-            <span className="self-start bg-[#590707]/30 border border-[#C0392B]/50 text-[#ff8080] text-[8px] font-mono tracking-widest px-3 py-1 rounded-md uppercase">
-              NUESTRA HISTORIA
-            </span>
-            <h2 className="text-2xl font-black tracking-tight leading-none text-white uppercase mt-2">
-              15 años construyendo<br />
-              carreras <span className="text-[#C0392B]">reales.</span>
-            </h2>
-            
-            <div className="h-[1px] bg-white/10 my-2" />
-            
-            <p className="text-xs text-white/70 leading-relaxed font-mono">
-              Kapital Music lleva más de 15 años liderando en la industria urbana. Hemos impulsado y desarrollado proyectos de más de 50 artistas activos y producido más de 250 canciones, cruzando fronteras continentales.
-            </p>
-            
-            <p className="text-xs text-white/70 leading-relaxed font-mono">
-              No somos un eslabón suelto. Somos la estructura integral de desarrollo: estudios, estrategia de pauta, producción de beats y consultoría jurídica de nivel élite. Todo consolidado bajo una misma dirección.
-            </p>
-          </div>
-        </div>
-      </section>
-
-
-      {/* ──────────────── SECTION 3: CONSTELACIÓN / ECOSYSTEM ──────────────── */}
-      <section className="w-full animate-[fu_0.6s_ease-out]">
-        <div className="relative bg-black/75 backdrop-blur-md border border-[#C0392B]/25 px-6 py-8 rounded-3xl w-full pointer-events-auto">
-          <HudBracket />
-          
-          <span className="inline-block bg-[#590707]/30 border border-[#C0392B]/50 text-[#ff8080] text-[8px] font-mono tracking-widest px-2.5 py-1 rounded mb-3 uppercase">
-            POR QUÉ KAPITAL
+        <div className="relative z-10 flex flex-col items-center max-w-3xl">
+          <span className="inline-flex items-center gap-2 bg-[#590707]/30 border border-[#C0392B]/35 text-[#ff8080] text-[9px] font-mono tracking-[0.25em] px-4 py-1.5 rounded-full mb-6 uppercase backdrop-blur-md">
+            <span className="w-1.5 h-1.5 bg-[#C0392B] rounded-full animate-ping" />
+            BIENVENIDO AL MOVIMIENTO
           </span>
-          <h2 className="text-2xl font-black tracking-tight leading-none text-white uppercase mb-2">
-            Un ecosistema <span className="text-[#C0392B]">completo para ti.</span>
-          </h2>
-          <p className="text-xs text-white/55 leading-relaxed mb-4 font-mono">
-            Kapital conecta cada pieza de tu carrera artística en un solo lugar — producción, estrategia, protección legal y visibilidad, todo trabajando en sincronía para que tú solo te enfoques en crear. <span className="text-white/30 italic">(Usa los faders y toca los canales para explorar en tiempo real)</span>
+          
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold leading-[0.9] tracking-tighter uppercase text-white mb-6">
+            Tu música.<br />
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#e63333] via-[#ff4d4d] to-[#8a0c0c] filter drop-shadow-[0_0_15px_rgba(230,51,51,0.2)]">Tu legado.</span><br />
+            Tu momento.
+          </h1>
+          
+          <p className="text-xs md:text-sm text-white/55 leading-relaxed mb-10 max-w-lg font-sans">
+            Somos el equipo que te acompaña a construir una carrera real — estrategia, producción y respaldo legal desde el día uno.
           </p>
 
-          <Ecosystem onServiceClick={(idx) => { setActiveSrv(idx); setPhase('services'); }} />
+          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center">
+            <button 
+              onClick={() => setPhase('form')}
+              className="bg-[#C0392B] hover:bg-[#8a0c0c] text-white font-mono font-bold uppercase tracking-wider py-4 px-8 rounded-xl shadow-[0_0_20px_rgba(192,57,43,0.3)] active:scale-95 transition-all duration-300 pointer-events-auto text-xs"
+            >
+              Quiero mi propuesta →
+            </button>
+            <button 
+              onClick={scrollToServices}
+              className="bg-transparent hover:bg-white/5 border border-white/10 hover:border-white/20 text-white font-mono font-bold uppercase tracking-wider py-4 px-8 rounded-xl active:scale-95 transition-all duration-300 pointer-events-auto text-xs"
+            >
+              Ver servicios
+            </button>
+          </div>
+          
+          <div className="text-[9px] font-mono text-white/30 tracking-widest mt-8 uppercase">
+            {"// Más de 200 artistas y músicos impulsados"}
+          </div>
         </div>
       </section>
 
+      {/* ──────────────── SECTION 2: NUESTROS SERVICIOS (Bento Grid) ──────────────── */}
+      <section id="servicios" className="w-full flex flex-col gap-8 scroll-mt-24">
+        <div className="flex flex-col gap-2 max-w-xl">
+          <span className="self-start bg-white/5 border border-white/10 text-white/40 text-[9px] font-mono tracking-[0.2em] px-3 py-1 rounded uppercase">
+            QUÉ HACEMOS
+          </span>
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-white uppercase tracking-tight">
+            Nuestros <span className="text-[#C0392B]">Servicios.</span>
+          </h2>
+          <p className="text-xs md:text-sm text-white/55 font-sans leading-relaxed">
+            Llevamos tu sonido al siguiente nivel integrando producción de élite, post-producción, asesoramiento legal y aceleración de audiencias.
+          </p>
+        </div>
 
-      {/* ──────────────── SECTION 4: LA CASA + COVERS + CTA FINAL ──────────────── */}
-      <section className="w-full flex flex-col gap-6 animate-[fu_0.7s_ease-out]">
-        {/* Album Strip Overlay */}
-        <div className="relative py-6 bg-black/75 border border-white/10 backdrop-blur-md rounded-3xl overflow-hidden">
-          <HudBracket />
-          <div className="px-6 mb-4 flex justify-between items-center">
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-6 w-full">
+          {/* Card 1: Producción (col-span-3) */}
+          <div className="group bg-neutral-950/40 backdrop-blur-md border border-white/5 rounded-2xl p-6 flex flex-col justify-between min-h-[220px] relative hover:border-[#C0392B]/40 transition-all duration-300 hover:shadow-[0_0_30px_rgba(192,57,43,0.1)] md:col-span-3">
+            <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#C0392B]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             <div>
-              <span className="inline-block bg-[#590707]/30 border border-[#C0392B]/30 text-[#ff8080] text-[8px] font-mono tracking-widest px-2.5 py-1 rounded uppercase mb-1">
+              <div className="text-2xl mb-4 bg-white/5 w-10 h-10 rounded-xl flex items-center justify-center border border-white/5 group-hover:border-[#C0392B]/30 group-hover:bg-[#C0392B]/10 transition-all duration-300">🎵</div>
+              <h3 className="text-lg font-display font-semibold text-white uppercase mb-2">Producción Musical</h3>
+              <p className="text-xs text-white/50 leading-relaxed font-sans">Beatmaking, arreglos y dirección integral con TunyD y Money Makers. Creamos tu sonido desde cero.</p>
+            </div>
+            <button onClick={() => { setActiveSrv(4); setPhase('services'); }} className="text-[9px] font-mono text-[#ff8080] tracking-widest uppercase text-left mt-6 hover:text-white transition-colors flex items-center gap-1">
+              ABRIR CANAL <span className="group-hover:translate-x-1 transition-transform">→</span>
+            </button>
+          </div>
+
+          {/* Card 2: Alquiler de Estudios (col-span-3) */}
+          <div className="group bg-neutral-950/40 backdrop-blur-md border border-white/5 rounded-2xl p-6 flex flex-col justify-between min-h-[220px] relative hover:border-[#C0392B]/40 transition-all duration-300 hover:shadow-[0_0_30px_rgba(192,57,43,0.1)] md:col-span-3">
+            <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#C0392B]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div>
+              <div className="text-2xl mb-4 bg-white/5 w-10 h-10 rounded-xl flex items-center justify-center border border-white/5 group-hover:border-[#C0392B]/30 group-hover:bg-[#C0392B]/10 transition-all duration-300">🎙️</div>
+              <h3 className="text-lg font-display font-semibold text-white uppercase mb-2">Alquiler de Estudios</h3>
+              <p className="text-xs text-white/50 leading-relaxed font-sans">Salas acústicamente calibradas (Estudio A y B) con equipamiento analógico premium para capturas impecables.</p>
+            </div>
+            <button onClick={() => { setActiveSrv(0); setPhase('services'); }} className="text-[9px] font-mono text-[#ff8080] tracking-widest uppercase text-left mt-6 hover:text-white transition-colors flex items-center gap-1">
+              ABRIR CANAL <span className="group-hover:translate-x-1 transition-transform">→</span>
+            </button>
+          </div>
+
+          {/* Card 3: Mezcla & Mastering (col-span-2) */}
+          <div className="group bg-neutral-950/40 backdrop-blur-md border border-white/5 rounded-2xl p-6 flex flex-col justify-between min-h-[200px] relative hover:border-[#C0392B]/40 transition-all duration-300 hover:shadow-[0_0_30px_rgba(192,57,43,0.1)] md:col-span-2">
+            <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#C0392B]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div>
+              <div className="text-2xl mb-4 bg-white/5 w-10 h-10 rounded-xl flex items-center justify-center border border-white/5 group-hover:border-[#C0392B]/30 group-hover:bg-[#C0392B]/10 transition-all duration-300">🎚️</div>
+              <h3 className="text-lg font-display font-semibold text-white uppercase mb-2">Mezcla & Mastering</h3>
+              <p className="text-xs text-white/50 leading-relaxed font-sans">Llevamos tus tomas de audio al estándar de la radio y plataformas. Sumado analógico y masterización en 72h.</p>
+            </div>
+            <button onClick={() => { setActiveSrv(2); setPhase('services'); }} className="text-[9px] font-mono text-[#ff8080] tracking-widest uppercase text-left mt-6 hover:text-white transition-colors flex items-center gap-1">
+              ABRIR CANAL <span className="group-hover:translate-x-1 transition-transform">→</span>
+            </button>
+          </div>
+
+          {/* Card 4: Asesoría Legal (col-span-2) */}
+          <div className="group bg-neutral-950/40 backdrop-blur-md border border-white/5 rounded-2xl p-6 flex flex-col justify-between min-h-[200px] relative hover:border-[#C0392B]/40 transition-all duration-300 hover:shadow-[0_0_30px_rgba(192,57,43,0.1)] md:col-span-2">
+            <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#C0392B]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div>
+              <div className="text-2xl mb-4 bg-white/5 w-10 h-10 rounded-xl flex items-center justify-center border border-white/5 group-hover:border-[#C0392B]/30 group-hover:bg-[#C0392B]/10 transition-all duration-300">⚖️</div>
+              <h3 className="text-lg font-display font-semibold text-white uppercase mb-2">Asesoría Legal</h3>
+              <p className="text-xs text-white/50 leading-relaxed font-sans">Protege tu catálogo artístico. Registro DNDA, split sheets, acuerdos comerciales y contratos profesionales.</p>
+            </div>
+            <button onClick={() => { setActiveSrv(1); setPhase('services'); }} className="text-[9px] font-mono text-[#ff8080] tracking-widest uppercase text-left mt-6 hover:text-white transition-colors flex items-center gap-1">
+              ABRIR CANAL <span className="group-hover:translate-x-1 transition-transform">→</span>
+            </button>
+          </div>
+
+          {/* Card 5: Marketing 30 (col-span-2) */}
+          <div className="group bg-neutral-950/40 backdrop-blur-md border border-white/5 rounded-2xl p-6 flex flex-col justify-between min-h-[200px] relative hover:border-[#C0392B]/40 transition-all duration-300 hover:shadow-[0_0_30px_rgba(192,57,43,0.1)] md:col-span-2">
+            <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#C0392B]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div>
+              <div className="text-2xl mb-4 bg-white/5 w-10 h-10 rounded-xl flex items-center justify-center border border-white/5 group-hover:border-[#C0392B]/30 group-hover:bg-[#C0392B]/10 transition-all duration-300">📲</div>
+              <h3 className="text-lg font-display font-semibold text-white uppercase mb-2">Marketing 30</h3>
+              <p className="text-xs text-white/50 leading-relaxed font-sans">Campañas de conversión en Meta Ads y TikTok para escalar tus streams en Spotify y viralizar tu presencia de marca.</p>
+            </div>
+            <button onClick={() => { setActiveSrv(3); setPhase('services'); }} className="text-[9px] font-mono text-[#ff8080] tracking-widest uppercase text-left mt-6 hover:text-white transition-colors flex items-center gap-1">
+              ABRIR CANAL <span className="group-hover:translate-x-1 transition-transform">→</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* ──────────────── SECTION 3: ECOSYSTEM & VALUES ──────────────── */}
+      <section id="sobre-nosotros" className="w-full flex flex-col gap-10 scroll-mt-24">
+        <div className="flex flex-col gap-2 max-w-xl">
+          <span className="self-start bg-white/5 border border-white/10 text-white/40 text-[9px] font-mono tracking-[0.2em] px-3 py-1 rounded uppercase">
+            FILOSOFÍA
+          </span>
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-white uppercase tracking-tight">
+            Un Ecosistema <span className="text-[#C0392B]">completo para ti.</span>
+          </h2>
+          <p className="text-xs md:text-sm text-white/55 font-sans leading-relaxed">
+            Conectamos cada pieza de tu carrera artística en un solo lugar para que tú solo te enfoques en lo que importa: crear.
+          </p>
+        </div>
+
+        {/* Mixer console integrated widget */}
+        <div className="relative bg-neutral-950/40 backdrop-blur-md border border-white/5 rounded-3xl p-6 w-full hover:border-[#C0392B]/20 transition-all duration-300">
+          <HudBracket />
+          <p className="text-[9px] text-[#ff8080] font-mono mb-6 uppercase text-center tracking-widest">
+            {"// Usa los faders y toca los canales de la consola en tiempo real"}
+          </p>
+          <Ecosystem onServiceClick={(idx) => { setActiveSrv(idx); setPhase('services'); }} />
+        </div>
+
+        {/* Values Bento Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
+          <div className="bg-neutral-950/20 backdrop-blur-md border border-white/5 rounded-xl p-5 hover:border-white/10 transition-colors duration-300">
+            <h4 className="text-xs font-display font-semibold text-[#ff8080] tracking-wider uppercase mb-2">Vision</h4>
+            <p className="text-[11px] text-white/50 leading-relaxed font-sans">Damos forma a tus ideas para que tu música se sienta intencional, duradera y potente.</p>
+          </div>
+          <div className="bg-neutral-950/20 backdrop-blur-md border border-white/5 rounded-xl p-5 hover:border-white/10 transition-colors duration-300">
+            <h4 className="text-xs font-display font-semibold text-[#ff8080] tracking-wider uppercase mb-2">Craft</h4>
+            <p className="text-[11px] text-white/50 leading-relaxed font-sans">Desde el diseño sonoro al master final, trabajamos con precisión milimétrica en cada canal.</p>
+          </div>
+          <div className="bg-neutral-950/20 backdrop-blur-md border border-white/5 rounded-xl p-5 hover:border-white/10 transition-colors duration-300">
+            <h4 className="text-xs font-display font-semibold text-[#ff8080] tracking-wider uppercase mb-2">Trust</h4>
+            <p className="text-[11px] text-white/50 leading-relaxed font-sans">Transparencia absoluta, plazos de entrega estrictos y compromisos cumplidos sin rodeos.</p>
+          </div>
+          <div className="bg-neutral-950/20 backdrop-blur-md border border-white/5 rounded-xl p-5 hover:border-white/10 transition-colors duration-300">
+            <h4 className="text-xs font-display font-semibold text-[#ff8080] tracking-wider uppercase mb-2">Energy</h4>
+            <p className="text-[11px] text-white/50 leading-relaxed font-sans">Creamos producciones con impacto, diseñadas para transmitir vibración y conectar al instante.</p>
+          </div>
+        </div>
+
+        {/* Stats metrics block */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+          {[
+            { target: 15, prefix: "", label: "Años en la música" },
+            { target: 50, prefix: "+", label: "Artistas activos" },
+            { target: 250, prefix: "+", label: "Canciones producidas" },
+            { target: null, widget: <span className="text-xl">🌎</span>, label: "Visibilidad Global" },
+          ].map((s, i) => (
+            <div key={i} className="bg-neutral-950/40 backdrop-blur-md border border-white/5 rounded-xl p-5 hover:border-[#C0392B]/20 transition-all duration-300">
+              <div className="font-display text-2xl md:text-3xl font-bold text-[#C0392B] leading-none mb-1">
+                {s.target !== null ? (
+                  <CountUp target={s.target} prefix={s.prefix} />
+                ) : (
+                  s.widget
+                )}
+              </div>
+              <div className="text-[8px] font-mono font-bold text-white/40 uppercase tracking-widest mt-2">{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ──────────────── SECTION 4: HISTORIA ──────────────── */}
+      <section className="w-full relative">
+        <div className="absolute w-[300px] h-[300px] rounded-full bg-red-500/5 blur-[80px] -right-12 z-0 pointer-events-none" />
+        <div className="relative py-10 px-8 bg-neutral-950/40 backdrop-blur-md border border-white/5 shadow-[0_0_30px_rgba(89,7,7,0.1)] rounded-3xl w-full hover:border-white/10 transition-colors duration-300">
+          <HudBracket />
+          
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+            <div className="md:col-span-5 flex flex-col gap-4">
+              <span className="self-start bg-[#590707]/30 border border-[#C0392B]/40 text-[#ff8080] text-[9px] font-mono tracking-widest px-3 py-1 rounded-md uppercase">
+                NUESTRA HISTORIA
+              </span>
+              <h2 className="text-2xl md:text-3xl font-display font-bold tracking-tight leading-none text-white uppercase">
+                15 años construyendo<br />
+                carreras <span className="text-[#C0392B]">reales.</span>
+              </h2>
+            </div>
+            
+            <div className="md:col-span-7 flex flex-col gap-4 text-xs text-white/60 leading-relaxed font-sans">
+              <p>
+                Kapital Music lleva más de 15 años liderando en la industria urbana. Hemos impulsado y desarrollado proyectos de más de 50 artistas activos y producido más de 250 canciones, cruzando fronteras continentales.
+              </p>
+              
+              <p>
+                No somos un eslabón suelto. Somos la estructura integral de desarrollo: estudios, estrategia de pauta, producción de beats y consultoría jurídica de nivel élite. Todo consolidado bajo una misma dirección.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ──────────────── SECTION 5: LANZAMIENTOS (Covers Grid) ──────────────── */}
+      <section id="lanzamientos" className="w-full scroll-mt-24">
+        <div className="relative py-8 bg-neutral-950/40 border border-white/5 backdrop-blur-md rounded-3xl overflow-hidden hover:border-white/10 transition-colors duration-300">
+          <HudBracket />
+          <div className="px-8 mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div>
+              <span className="inline-block bg-[#590707]/30 border border-[#C0392B]/30 text-[#ff8080] text-[9px] font-mono tracking-widest px-2.5 py-1 rounded uppercase mb-2">
                 +250 CANCIONES PRODUCIDAS
               </span>
-              <p className="text-[10px] text-white/50 font-mono">Parte del catálogo que hemos construido</p>
+              <h2 className="text-lg font-display font-semibold uppercase text-white">Parte del catálogo que hemos construido</h2>
             </div>
-            <div className="text-[8px] font-mono text-white/30">COUNT: 250+</div>
+            <div className="text-[9px] font-mono text-white/30 uppercase tracking-widest border border-white/5 bg-white/[0.02] px-3 py-1.5 rounded-lg">COUNT: 250+</div>
           </div>
 
           {/* Row 1: Leftward Scroll */}
-          <div className="overflow-hidden w-full relative mb-4">
+          <div className="overflow-hidden w-full relative mb-6">
             <div className="flex gap-4 animate-scroll-albums hover:[animation-play-state:paused] w-max">
               {[...PORTADAS_ROW1, ...PORTADAS_ROW1].map((url, i) => (
-                <img 
-                  key={i} 
-                  src={url} 
-                  alt={"lanzamiento a " + i} 
-                  className="w-20 h-20 rounded-xl object-cover border border-white/10 shadow-lg flex-shrink-0 transition-all duration-300"
-                  onError={e => { e.target.style.display = "none"; }} 
-                />
+                <div key={i} className="group relative flex-shrink-0 w-24 h-24 sm:w-28 sm:h-28 overflow-hidden rounded-xl border border-white/10 shadow-lg transition-transform duration-300 hover:scale-105">
+                  <img 
+                    src={url} 
+                    alt={`lanzamiento-a-${i}`} 
+                    className="w-full h-full object-cover transition-all duration-300"
+                    onError={e => { e.target.style.display = "none"; }} 
+                  />
+                </div>
               ))}
             </div>
           </div>
@@ -174,39 +303,119 @@ export default function LandingView() {
           <div className="overflow-hidden w-full relative">
             <div className="flex gap-4 animate-scroll-albums-rev hover:[animation-play-state:paused] w-max">
               {[...PORTADAS_ROW2, ...PORTADAS_ROW2].map((url, i) => (
-                <img 
-                  key={i} 
-                  src={url} 
-                  alt={"lanzamiento b " + i} 
-                  className="w-20 h-20 rounded-xl object-cover border border-white/10 shadow-lg flex-shrink-0 transition-all duration-300"
-                  onError={e => { e.target.style.display = "none"; }} 
-                />
+                <div key={i} className="group relative flex-shrink-0 w-24 h-24 sm:w-28 sm:h-28 overflow-hidden rounded-xl border border-white/10 shadow-lg transition-transform duration-300 hover:scale-105">
+                  <img 
+                    src={url} 
+                    alt={`lanzamiento-b-${i}`} 
+                    className="w-full h-full object-cover transition-all duration-300"
+                    onError={e => { e.target.style.display = "none"; }} 
+                  />
+                </div>
               ))}
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Gallery */}
-        <div className="relative">
-          <LaCasa />
+      {/* ──────────────── SECTION 6: LA CASA (Studio Gallery) ──────────────── */}
+      <section className="w-full">
+        <LaCasa />
+      </section>
+
+      {/* ──────────────── SECTION 7: TESTIMONIOS (Testimonials) ──────────────── */}
+      <section className="w-full flex flex-col gap-8">
+        <div className="flex flex-col gap-2 max-w-xl">
+          <span className="self-start bg-white/5 border border-white/10 text-white/40 text-[9px] font-mono tracking-[0.2em] px-3 py-1 rounded uppercase">
+            TESTIMONIOS
+          </span>
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-white uppercase tracking-tight">
+            Lo que dicen <span className="text-[#C0392B]">los artistas.</span>
+          </h2>
         </div>
 
-        {/* Final Interactive CTA Panel */}
-        <div className="bg-gradient-to-br from-[#590707]/80 to-[#2a0303]/90 backdrop-blur-md border border-[#590707]/50 px-6 py-8 rounded-3xl text-center flex flex-col items-center relative overflow-hidden">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full">
+          <div className="bg-neutral-950/40 backdrop-blur-md border border-white/5 rounded-2xl p-6 flex flex-col justify-between hover:border-white/10 transition-colors duration-300">
+            <p className="text-xs text-white/70 leading-relaxed font-sans mb-6">"TunyD transformó mi maqueta en un tema que suena listo para radio nacional. Su atención al detalle y estructura de producción marcó toda la diferencia."</p>
+            <div>
+              <div className="h-[1px] bg-white/5 my-4" />
+              <div className="text-[11px] font-display font-semibold text-white uppercase">Nova Kane</div>
+              <div className="text-[8px] font-mono text-[#ff8080] uppercase tracking-wider mt-1">Midnight Drive</div>
+            </div>
+          </div>
+
+          <div className="bg-neutral-950/40 backdrop-blur-md border border-white/5 rounded-2xl p-6 flex flex-col justify-between hover:border-white/10 transition-colors duration-300">
+            <p className="text-xs text-white/70 leading-relaxed font-sans mb-6">"Trabajar con el equipo de Kapital fue impecable de principio a fin. Comunicación clara y sincera, sin demoras de cronograma y un resultado increíble."</p>
+            <div>
+              <div className="h-[1px] bg-white/5 my-4" />
+              <div className="text-[11px] font-display font-semibold text-white uppercase">Kairo</div>
+              <div className="text-[8px] font-mono text-[#ff8080] uppercase tracking-wider mt-1">Lost in Echoes</div>
+            </div>
+          </div>
+
+          <div className="bg-neutral-950/40 backdrop-blur-md border border-white/5 rounded-2xl p-6 flex flex-col justify-between hover:border-white/10 transition-colors duration-300">
+            <p className="text-xs text-white/70 leading-relaxed font-sans mb-6">"El proceso de masterización final le dio a mi canción ese brillo y pegada comercial que le faltaba. Ahora suena potente y con mucha pegada en plataformas."</p>
+            <div>
+              <div className="h-[1px] bg-white/5 my-4" />
+              <div className="text-[11px] font-display font-semibold text-white uppercase">Lila Ray</div>
+              <div className="text-[8px] font-mono text-[#ff8080] uppercase tracking-wider mt-1">Heart on Repeat</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ──────────────── SECTION 8: PREGUNTAS FRECUENTES (FAQ Acordeón) ──────────────── */}
+      <section id="faq" className="w-full flex flex-col gap-8 scroll-mt-24">
+        <div className="flex flex-col gap-2 max-w-xl">
+          <span className="self-start bg-white/5 border border-white/10 text-white/40 text-[9px] font-mono tracking-[0.2em] px-3 py-1 rounded uppercase">
+            FAQ
+          </span>
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-white uppercase tracking-tight">
+            ¿Tienes <span className="text-[#C0392B]">Preguntas?</span>
+          </h2>
+        </div>
+
+        <div className="flex flex-col gap-3 w-full max-w-3xl">
+          {faqs.map((f, i) => {
+            const isOpen = openFaq === i;
+            return (
+              <div key={i} className="border border-white/5 bg-neutral-950/20 backdrop-blur-md rounded-2xl overflow-hidden transition-all duration-300 hover:border-white/10">
+                <button 
+                  onClick={() => setOpenFaq(isOpen ? null : i)}
+                  className="w-full text-left p-5 flex items-center justify-between pointer-events-auto transition-colors duration-300 hover:bg-white/[0.01]"
+                >
+                  <span className="text-xs md:text-sm font-semibold text-white leading-normal font-sans">{f.q}</span>
+                  <span className="text-[#ff8080] text-xs transition-transform duration-300" style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+                    ▼
+                  </span>
+                </button>
+                {isOpen && (
+                  <div className="px-5 pb-5 pt-0 text-xs text-white/50 leading-relaxed font-sans border-t border-white/5 pt-4 animate-[fu_0.2s_ease-out]">
+                    {f.a}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* ──────────────── SECTION 9: CTA FINAL (Get In Touch) ──────────────── */}
+      <section className="w-full">
+        <div className="bg-gradient-to-br from-[#590707]/80 to-[#2a0303]/90 backdrop-blur-md border border-[#590707]/40 px-6 py-12 md:py-16 rounded-3xl text-center flex flex-col items-center relative overflow-hidden">
           <HudBracket />
-          <span className="inline-block bg-black/40 border border-white/15 text-white/50 text-[8px] font-mono tracking-widest px-3 py-1 rounded mb-4 uppercase">
+          <span className="inline-block bg-black/40 border border-white/10 text-white/50 text-[9px] font-mono tracking-widest px-3 py-1 rounded mb-4 uppercase">
             ¿LISTO?
           </span>
-          <h2 className="text-2xl font-black tracking-tight leading-none text-white uppercase mb-2">
+          <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tight leading-none text-white uppercase mb-4">
             Construyamos tu carrera juntos
           </h2>
-          <p className="text-xs text-white/60 leading-relaxed mb-6 max-w-sm font-mono">
+          <p className="text-xs md:text-sm text-white/60 leading-relaxed mb-8 max-w-md font-sans">
             Completa el formulario y te armamos una propuesta personalizada con precios exactos. Sin compromisos.
           </p>
           
           <button 
             onClick={() => setPhase('form')}
-            className="bg-white hover:bg-white/90 text-[#590707] font-black uppercase tracking-wider py-4 px-8 rounded-xl active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.2)] transition-all duration-300 pointer-events-auto text-xs"
+            className="bg-white hover:bg-white/90 text-[#590707] font-mono font-bold uppercase tracking-wider py-4 px-10 rounded-xl active:scale-95 shadow-[0_0_30px_rgba(255,255,255,0.25)] transition-all duration-300 pointer-events-auto text-xs animate-pulse"
           >
             Comenzar ahora →
           </button>

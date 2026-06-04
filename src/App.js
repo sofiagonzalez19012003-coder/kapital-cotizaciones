@@ -17,10 +17,22 @@ export default function App() {
     reset, 
     loadMsg, 
     setLoadMsg,
-    setScrollProgress
+    setScrollProgress,
+    setPhase
   } = useFormStore();
   
   const topRef = useRef(null);
+
+  const handleNavClick = (sectionId) => {
+    if (phase !== 'landing') {
+      reset();
+      setTimeout(() => {
+        document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+      }, 150);
+    } else {
+      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   const LOAD_MSGS = ["Analizando tu perfil...", "Calculando tu cotización...", "Identificando qué te está frenando...", "Armando tu plan de carrera...", "Ya casi está lista..."];
 
@@ -56,7 +68,7 @@ export default function App() {
   }, [phase]);
 
   return (
-    <div className="relative min-h-screen text-white font-['Raleway'] overflow-x-hidden bg-[#070707]">
+    <div className="relative min-h-screen text-white font-sans overflow-x-hidden bg-[#070707]">
       {/* 3D WebGL Background Scene */}
       <Scene />
 
@@ -69,28 +81,44 @@ export default function App() {
       <div className="relative z-10 min-h-screen flex flex-col justify-between pointer-events-none">
         
         {/* Navigation Bar */}
-        <nav className="sticky top-0 w-full backdrop-blur-md bg-[#080808]/80 border-b border-[#590707]/30 px-6 py-4 flex items-center justify-between pointer-events-auto">
+        <nav className="sticky top-0 w-full backdrop-blur-md bg-[#080808]/85 border-b border-white/5 px-6 md:px-12 py-4 flex items-center justify-between pointer-events-auto z-[100] transition-colors duration-300">
           <div className="flex items-center gap-3 cursor-pointer" onClick={reset}>
             <img 
               src={LOGO_NAV} 
               alt="Kapital Music" 
-              className="w-10 h-10 object-contain block flex-shrink-0"
+              className="w-9 h-9 object-contain block flex-shrink-0"
               onError={e => { e.target.style.display = "none"; }} 
             />
             <div>
-              <div className="text-xs font-black tracking-widest text-white uppercase">Kapital Music</div>
-              <div className="text-[9px] text-white/30 tracking-widest uppercase">Sello Independiente</div>
+              <div className="text-[11px] font-display font-black tracking-widest text-white uppercase leading-none">Kapital Music</div>
+              <div className="text-[8px] font-mono text-white/30 tracking-widest uppercase mt-0.5">Sello Independiente</div>
             </div>
           </div>
+
+          {/* Center Links (Framer Waveform Style) */}
+          <div className="hidden md:flex items-center gap-8 text-[11px] font-mono text-white/50 tracking-wider">
+            <button onClick={() => handleNavClick('servicios')} className="hover:text-white transition-colors duration-200 uppercase">Servicios</button>
+            <button onClick={() => handleNavClick('sobre-nosotros')} className="hover:text-white transition-colors duration-200 uppercase">Nosotros</button>
+            <button onClick={() => handleNavClick('lanzamientos')} className="hover:text-white transition-colors duration-200 uppercase">Lanzamientos</button>
+            <button onClick={() => handleNavClick('faq')} className="hover:text-white transition-colors duration-200 uppercase">FAQ</button>
+          </div>
+
           <div className="flex gap-4 items-center">
             {savedOk && (
               <div className="text-[10px] text-emerald-400 font-bold border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 rounded-full">
                 ✓ Guardado
               </div>
             )}
-            {phase !== "landing" && (
+            {phase === "landing" ? (
               <button 
-                className="px-4 py-2 border border-white/10 hover:border-white/30 rounded-lg text-[10px] font-bold tracking-widest uppercase text-white/60 hover:text-white transition-all pointer-events-auto"
+                onClick={() => setPhase('form')}
+                className="bg-[#C0392B] hover:bg-[#8a0c0c] text-white font-mono text-[9px] font-bold tracking-widest uppercase py-2 px-4 rounded-xl border border-red-500/20 active:scale-95 transition-all duration-300 shadow-[0_0_15px_rgba(192,57,43,0.3)]"
+              >
+                Propuesta →
+              </button>
+            ) : (
+              <button 
+                className="px-4 py-2 border border-white/10 hover:border-white/30 rounded-lg text-[9px] font-mono font-bold tracking-widest uppercase text-white/60 hover:text-white transition-all pointer-events-auto"
                 onClick={reset}
               >
                 ← Inicio

@@ -5,6 +5,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+        display: ['Clash Display', 'sans-serif'],
+      },
       animation: {
         'scroll-albums': 'scroll-albums 45s linear infinite',
         'scroll-albums-rev': 'scroll-albums-rev 45s linear infinite',

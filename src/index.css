@@ -2,10 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&display=swap');
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { background: #080808; color: #fff; font-family: 'Raleway', sans-serif; overflow-x: hidden; width: 100%; min-height: 100vh; -webkit-text-size-adjust: 100%; }
+html, body { background: #080808; color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; width: 100%; min-height: 100vh; -webkit-text-size-adjust: 100%; }
 
 .fu { animation: fu .38s ease-out both; }
 @keyframes fu { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
