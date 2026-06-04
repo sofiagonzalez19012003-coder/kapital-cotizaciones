@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #080808; color: #fff; font-family: 'Raleway', sans-serif; overflow-x: hidden; width: 100%; min-height: 100vh; -webkit-text-size-adjust: 100%; }
+
+.fu { animation: fu .38s ease-out both; }
+@keyframes fu { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+
+.fu-left { animation: fu-left .5s ease-out both; }
+@keyframes fu-left { from { opacity:0; transform:translateX(-20px); } to { opacity:1; transform:translateX(0); } }
+
+.fu-scale { animation: fu-scale .4s cubic-bezier(.34,1.56,.64,1) both; }
+@keyframes fu-scale { from { opacity:0; transform:scale(.85); } to { opacity:1; transform:scale(1); } }
+
+.spin { animation: spin .8s linear infinite; }
+@keyframes spin { to { transform:rotate(360deg); } }
+
+.pulse { animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
