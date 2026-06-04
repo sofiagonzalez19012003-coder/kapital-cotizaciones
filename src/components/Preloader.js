@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { LOGO_URL } from '../utils/businessLogic';
 
 const diagnosticLogs = [
-  "KAPITAL_A&R_CORE: v2.0.26 INIT...",
+  "KAPITAL_CORE: v2.0.26 INIT...",
   "GPU_RENDERER: WEBGL_ACTIVE",
   "ESTABLISHING SECURE SHEET LINK...",
   "CACHING AUDITORY DATA PACKETS...",
@@ -82,7 +82,7 @@ export default function Preloader({ onDone }) {
       {/* Title */}
       <div className="text-center mb-8 relative z-10">
         <div className="text-xl font-black tracking-[0.4em] text-white">KAPITAL</div>
-        <div className="text-xs font-bold tracking-[0.5em] text-[#C0392B] mt-1">A&R SYSTEM</div>
+        <div className="text-xs font-bold tracking-[0.4em] text-[#C0392B] mt-1 uppercase">Asesoría Personalizada</div>
       </div>
 
       {/* Boot Logs Terminal */}

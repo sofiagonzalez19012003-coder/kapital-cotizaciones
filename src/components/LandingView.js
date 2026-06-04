@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { useFormStore } from '../store/useFormStore';
-import { PORTADAS_ROW1 } from '../utils/businessLogic';
+import { PORTADAS_ROW1, PORTADAS_ROW2 } from '../utils/businessLogic';
 import CountUp from './CountUp';
 import Ecosystem from './Ecosystem';
 import LaCasa from './LaCasa';
@@ -90,9 +90,7 @@ export default function LandingView() {
               <span className="w-1.5 h-1.5 bg-[#C0392B] rounded-full animate-ping" />
               <span>PORTAL: ONLINE</span>
             </div>
-            <div>LATENCY: 12MS</div>
-            <div className="hidden sm:block">A&R_ENGINE_ACTIVE</div>
-            <div>SYS_TEMP: 34°C</div>
+            <div>ASESORÍA PERSONALIZADA</div>
           </div>
           
           <div className="relative z-10 text-center flex flex-col items-center">
@@ -107,7 +105,7 @@ export default function LandingView() {
             </h1>
             
             <p className="text-xs text-white/55 leading-relaxed mb-8 max-w-md font-mono">
-              Portal automatizado de A&R y cotización inteligente. Diseña tu plan de carrera profesional en la industria urbana bajo supervisión de Kapital Music.
+              Somos Kapital Music, tu aliado estratégico en el desarrollo artístico. Te ayudamos a potenciar tu carrera integrando producción musical, pauta digital, desarrollo de marca y asesoramiento legal, todo estructurado a tu medida de forma rápida y profesional.
             </p>
 
             {/* Interactive Diagnostic Widget Grid */}
@@ -137,7 +135,7 @@ export default function LandingView() {
                 onClick={() => setPhase('form')}
                 className="bg-gradient-to-r from-[#590707] to-[#8a0c0c] hover:from-[#8a0c0c] hover:to-[#C0392B] text-white font-extrabold uppercase tracking-wider py-4 px-8 rounded-xl shadow-[0_0_20px_rgba(192,57,43,0.4)] active:scale-95 transition-all duration-300 pointer-events-auto text-xs"
               >
-                Comenzar A&R Digital →
+                Comenzar Asesoría Personalizada →
               </button>
               <div className="text-[9px] font-mono text-white/40 mt-4 sm:hidden flex items-center justify-center gap-1.5 animate-bounce">
                 <span>↓ Desliza para explorar</span>
@@ -188,13 +186,13 @@ export default function LandingView() {
           <HudBracket />
           
           <span className="inline-block bg-[#590707]/30 border border-[#C0392B]/50 text-[#ff8080] text-[8px] font-mono tracking-widest px-2.5 py-1 rounded mb-3 uppercase">
-            {"// SUB_DIAGRAMA: ECOSYSTEM_MAP"}
+            {"// CONSOLA: MEZCLADOR_INTERACTIVO"}
           </span>
           <h2 className="text-2xl font-black tracking-tight leading-none text-white uppercase mb-2">
             Ecosistema Kapital
           </h2>
           <p className="text-xs text-white/40 leading-relaxed mb-6 font-mono">
-            Haz clic en los satélites interactivos de la constelación para auditar los servicios y sus tecnologías asociadas.
+            Usa los faders y toca los canales para explorar e iluminar nuestros servicios de desarrollo artístico en tiempo real.
           </p>
 
           <Ecosystem onServiceClick={(idx) => { setActiveSrv(idx); setPhase('services'); }} />
@@ -215,18 +213,34 @@ export default function LandingView() {
               <span className="inline-block bg-[#590707]/30 border border-[#C0392B]/30 text-[#ff8080] text-[8px] font-mono tracking-widest px-2.5 py-1 rounded uppercase mb-1">
                 {"// DATA_STREAM: RELEASES"}
               </span>
-              <p className="text-[10px] text-white/50 font-mono">Catálogo activo en bases de datos</p>
+              <p className="text-[10px] text-white/50 font-mono">Catálogo activo y lanzamientos del sello</p>
             </div>
             <div className="text-[8px] font-mono text-white/30">COUNT: 250+</div>
           </div>
 
-          <div className="overflow-hidden w-full relative">
-            <div className="flex gap-4 animate-[scroll-albums_45s_linear_infinite] hover:[animation-play-state:paused] w-max">
+          {/* Row 1: Leftward Scroll */}
+          <div className="overflow-hidden w-full relative mb-4">
+            <div className="flex gap-4 animate-scroll-albums hover:[animation-play-state:paused] w-max">
               {[...PORTADAS_ROW1, ...PORTADAS_ROW1].map((url, i) => (
                 <img 
                   key={i} 
                   src={url} 
-                  alt={"portada " + i} 
+                  alt={"lanzamiento a " + i} 
+                  className="w-20 h-20 rounded-xl object-cover border border-white/10 shadow-lg flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300"
+                  onError={e => { e.target.style.display = "none"; }} 
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Row 2: Rightward Scroll */}
+          <div className="overflow-hidden w-full relative">
+            <div className="flex gap-4 animate-scroll-albums-rev hover:[animation-play-state:paused] w-max">
+              {[...PORTADAS_ROW2, ...PORTADAS_ROW2].map((url, i) => (
+                <img 
+                  key={i} 
+                  src={url} 
+                  alt={"lanzamiento b " + i} 
                   className="w-20 h-20 rounded-xl object-cover border border-white/10 shadow-lg flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300"
                   onError={e => { e.target.style.display = "none"; }} 
                 />
@@ -250,14 +264,14 @@ export default function LandingView() {
             Inicia tu desarrollo
           </h2>
           <p className="text-xs text-white/60 leading-relaxed mb-6 max-w-sm font-mono">
-            Completando el cuestionario obtendrás un análisis de viabilidad legal y producción a cargo de nuestro A&R automatizado.
+            Completando el cuestionario obtendrás una propuesta de desarrollo de carrera y cotización a tu medida bajo nuestra supervisión.
           </p>
           
           <button 
             onClick={() => setPhase('form')}
             className="bg-white hover:bg-white/90 text-[#590707] font-black uppercase tracking-wider py-4 px-8 rounded-xl active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.2)] transition-all duration-300 pointer-events-auto text-xs"
           >
-            Comenzar Diagnóstico A&R →
+            Comenzar Asesoría Personalizada →
           </button>
         </div>
       </section>
