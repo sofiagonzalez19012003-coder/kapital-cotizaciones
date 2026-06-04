@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { useFormStore } from '../store/useFormStore';
 import { PORTADAS_ROW1, PORTADAS_ROW2 } from '../utils/businessLogic';
 import CountUp from './CountUp';
@@ -18,42 +18,15 @@ function HudBracket() {
 
 
 export default function LandingView() {
-  const { setPhase, setActiveSrv, scrollProgress } = useFormStore();
+  const { setPhase, setActiveSrv } = useFormStore();
 
-  // Opacity calculations for fading sections in and out based on scrollProgress
-  // Section 1 (Hero/Dashboard): Scroll 0.0 -> 0.25 (fades out by 0.2)
-  const opacityS1 = useMemo(() => {
-    return Math.max(0, 1 - (scrollProgress * 5));
-  }, [scrollProgress]);
 
-  // Section 2 (History): Scroll 0.25 -> 0.5 (fades in 0.2->0.3, fades out 0.45->0.5)
-  const opacityS2 = useMemo(() => {
-    if (scrollProgress < 0.15) return 0;
-    if (scrollProgress > 0.45) return Math.max(0, 1 - (scrollProgress - 0.45) * 10);
-    return Math.min(1, (scrollProgress - 0.15) * 8);
-  }, [scrollProgress]);
-
-  // Section 3 (Ecosystem): Scroll 0.5 -> 0.75 (fades in 0.45->0.55, fades out 0.7->0.75)
-  const opacityS3 = useMemo(() => {
-    if (scrollProgress < 0.4) return 0;
-    if (scrollProgress > 0.72) return Math.max(0, 1 - (scrollProgress - 0.72) * 10);
-    return Math.min(1, (scrollProgress - 0.4) * 8);
-  }, [scrollProgress]);
-
-  // Section 4 (La Casa + CTA): Scroll 0.75 -> 1.0 (fades in 0.7->0.8)
-  const opacityS4 = useMemo(() => {
-    if (scrollProgress < 0.68) return 0;
-    return Math.min(1, (scrollProgress - 0.68) * 8);
-  }, [scrollProgress]);
 
   return (
-    <div className="w-full flex flex-col pointer-events-auto max-w-xl mx-auto pb-24">
+    <div className="w-full flex flex-col max-w-xl mx-auto gap-6 px-4 py-8 pointer-events-auto">
       
       {/* ──────────────── SECTION 1: HERO / CORE DASHBOARD ──────────────── */}
-      <section 
-        style={{ opacity: opacityS1, transform: `translateY(${-scrollProgress * 40}px)`, transition: 'transform 0.1s ease-out' }}
-        className="min-h-screen flex items-center justify-center w-full transition-opacity duration-300"
-      >
+      <section className="w-full animate-[fu_0.4s_ease-out]">
         <div className="relative py-10 px-6 bg-black/70 backdrop-blur-md border border-white/10 shadow-[0_0_30px_rgba(89,7,7,0.25)] rounded-3xl w-full">
           <HudBracket />
 
@@ -120,10 +93,7 @@ export default function LandingView() {
 
 
       {/* ──────────────── SECTION 2: HISTORY / LOG DIAGNOSTICS ──────────────── */}
-      <section 
-        style={{ opacity: opacityS2 }}
-        className="min-h-screen flex items-center justify-center w-full transition-opacity duration-300 pointer-events-none"
-      >
+      <section className="w-full animate-[fu_0.5s_ease-out]">
         <div className="relative py-10 px-6 bg-black/75 backdrop-blur-md border border-white/10 shadow-[0_0_30px_rgba(89,7,7,0.25)] rounded-3xl w-full pointer-events-auto">
           <HudBracket />
           
@@ -151,10 +121,7 @@ export default function LandingView() {
 
 
       {/* ──────────────── SECTION 3: CONSTELACIÓN / ECOSYSTEM ──────────────── */}
-      <section 
-        style={{ opacity: opacityS3 }}
-        className="min-h-screen flex items-center justify-center w-full transition-opacity duration-300 pointer-events-none"
-      >
+      <section className="w-full animate-[fu_0.6s_ease-out]">
         <div className="relative bg-black/75 backdrop-blur-md border border-[#C0392B]/25 px-6 py-8 rounded-3xl w-full pointer-events-auto">
           <HudBracket />
           
@@ -174,10 +141,7 @@ export default function LandingView() {
 
 
       {/* ──────────────── SECTION 4: LA CASA + COVERS + CTA FINAL ──────────────── */}
-      <section 
-        style={{ opacity: opacityS4 }}
-        className="min-h-screen flex flex-col justify-center gap-8 w-full transition-opacity duration-300"
-      >
+      <section className="w-full flex flex-col gap-6 animate-[fu_0.7s_ease-out]">
         {/* Album Strip Overlay */}
         <div className="relative py-6 bg-black/75 border border-white/10 backdrop-blur-md rounded-3xl overflow-hidden">
           <HudBracket />

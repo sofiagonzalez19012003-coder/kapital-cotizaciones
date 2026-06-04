@@ -35,107 +35,105 @@ function CameraRig() {
   return null;
 }
 
-function HolographicVinyl() {
-  const vinylRef = useRef();
+function SoundWaves() {
+  const pointsRef = useRef();
   const scrollProgress = useFormStore(state => state.scrollProgress);
-  const phase = useFormStore(state => state.phase);
 
-  const groovesMaterial = useMemo(() => {
-    return new THREE.MeshStandardMaterial({
-      color: "#C0392B",
-      emissive: "#C0392B",
-      emissiveIntensity: 1.2,
-      roughness: 0.1,
-      metalness: 0.95
-    });
-  }, []);
+  const numLines = 5;
+  const pointsPerLine = 100;
+  const count = numLines * pointsPerLine;
 
-  const tilt = useMemo(() => {
-    if (phase !== 'landing') return 0.5; // Default tilt
-    // Tilts slightly more as the user scrolls
-    return 0.5 + (scrollProgress * 0.4);
-  }, [scrollProgress, phase]);
+  // Generate wave line points and vertex colors
+  const [positions, colors, initialX, lineIndices] = useMemo(() => {
+    const pos = new Float32Array(count * 3);
+    const cols = new Float32Array(count * 3);
+    const initX = new Float32Array(count);
+    const lineInd = new Float32Array(count);
 
-  const speed = useMemo(() => {
-    if (phase !== 'landing') return 0.12;
-    return 0.12 + (scrollProgress * 0.35);
-  }, [scrollProgress, phase]);
+    const baseColors = [
+      new THREE.Color("#C0392B"), // Rojo Kapital
+      new THREE.Color("#E74C3C"), // Rojo Brillante
+      new THREE.Color("#e63333"), // Rojo Neón
+      new THREE.Color("#8a0c0c"), // Vino Tinto Oscuro
+      new THREE.Color("#ff8080"), // Coral Claro
+    ];
+
+    let idx = 0;
+    for (let l = 0; l < numLines; l++) {
+      const z = -6.5 + (l - (numLines - 1) / 2) * 1.5;
+      const c = baseColors[l % baseColors.length];
+
+      for (let p = 0; p < pointsPerLine; p++) {
+        const x = -8 + (p / (pointsPerLine - 1)) * 16;
+        
+        pos[idx * 3] = x;
+        pos[idx * 3 + 1] = 0;
+        pos[idx * 3 + 2] = z;
+
+        cols[idx * 3] = c.r;
+        cols[idx * 3 + 1] = c.g;
+        cols[idx * 3 + 2] = c.b;
+
+        initX[idx] = x;
+        lineInd[idx] = l;
+        idx++;
+      }
+    }
+    return [pos, cols, initX, lineInd];
+  }, [count, numLines, pointsPerLine]);
+
+  const posAttrRef = useRef();
 
   useFrame((state) => {
     const elapsed = state.clock.getElapsedTime();
-    if (vinylRef.current) {
-      // Platters rotation around Y-axis
-      vinylRef.current.rotation.y = elapsed * speed;
-      // Tilt transition based on scroll
-      vinylRef.current.rotation.x = THREE.MathUtils.lerp(vinylRef.current.rotation.x, tilt, 0.05);
-      
-      // Simulated audio waveform: bass beats + mid vibration + treble ripples
-      const bass = Math.sin(elapsed * 6.5) * 0.035;
-      const mid = Math.cos(elapsed * 16.0) * 0.009;
-      const treble = Math.sin(elapsed * 32.0) * 0.003;
-      const pulse = 1.0 + bass + mid + treble;
-      
-      // Scale pulse representation of sound energy
-      vinylRef.current.scale.set(pulse, pulse, pulse);
+    if (!posAttrRef.current) return;
+    const arr = posAttrRef.current.array;
 
-      // Piston-like speaker vibration along the Y-axis (bobbing)
-      const vibration = Math.sin(elapsed * 6.5) * 0.05 + Math.cos(elapsed * 13.0) * 0.015;
-      vinylRef.current.position.y = vibration;
+    // Reacting to user scrolling by changing speed and amplitude
+    const scrollFactor = 1.0 + scrollProgress * 3.5;
 
-      // Glow pulse on grooves simulating soundwave dynamic ranges
-      if (groovesMaterial) {
-        const beat = Math.sin(elapsed * 6.5) * 0.7 + Math.cos(elapsed * 16.0) * 0.35;
-        groovesMaterial.emissiveIntensity = Math.max(0.5, 1.2 + beat);
-      }
+    for (let i = 0; i < count; i++) {
+      const x = initialX[i];
+      const l = lineIndices[i];
+
+      // Simulated sound waves frequencies:
+      // Bass beats
+      const bass = Math.sin(x * 0.45 + elapsed * 3.0 * scrollFactor + l * 0.6) * 0.85;
+      // Mid range
+      const mid = Math.cos(x * 1.6 - elapsed * 6.5 + l * 1.2) * 0.28;
+      // High frequency treble
+      const treble = Math.sin(x * 4.2 + elapsed * 15.0) * 0.08;
+
+      // Parabolic boundary mask to pinch the wave at the screen borders
+      const envelope = Math.max(0, 1.0 - (x * x) / 64.0);
+
+      arr[i * 3 + 1] = (bass + mid + treble) * envelope * 1.3;
     }
+    posAttrRef.current.needsUpdate = true;
   });
 
   return (
-    <group ref={vinylRef} position={[0, 0, -6]}>
-      {/* Vinyl Outer Platter (Concentric ridges styled cylinder) */}
-      <mesh>
-        <cylinderGeometry args={[2.2, 2.2, 0.05, 64]} />
-        <meshStandardMaterial 
-          color="#111111" 
-          roughness={0.25}
-          metalness={0.9}
+    <points ref={pointsRef}>
+      <bufferGeometry>
+        <bufferAttribute
+          ref={posAttrRef}
+          attach="attributes-position"
+          args={[positions, 3]}
         />
-      </mesh>
-
-      {/* Glossy grooves grooves representation (Thin torus layers) */}
-      {[1.9, 1.6, 1.3, 1.0].map((r, i) => (
-        <mesh 
-          key={i} 
-          position={[0, 0.026, 0]} 
-          rotation={[Math.PI / 2, 0, 0]}
-          material={groovesMaterial}
-        >
-          <torusGeometry args={[r, 0.006, 4, 64]} />
-        </mesh>
-      ))}
-
-      {/* Red Center Label */}
-      <mesh position={[0, 0.028, 0]} rotation={[Math.PI / 2, 0, 0]}>
-        <cylinderGeometry args={[0.6, 0.6, 0.005, 32]} />
-        <meshBasicMaterial color="#C0392B" />
-      </mesh>
-
-      {/* Center Label decorative rings */}
-      <mesh position={[0, 0.031, 0]} rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[0.5, 0.004, 4, 32]} />
-        <meshBasicMaterial color="#111111" />
-      </mesh>
-
-      {/* Spindle Center Pin (Metallic silver) */}
-      <mesh position={[0, 0.05, 0]}>
-        <cylinderGeometry args={[0.06, 0.06, 0.1, 16]} />
-        <meshStandardMaterial 
-          color="#ffffff" 
-          roughness={0.1}
-          metalness={0.95}
+        <bufferAttribute
+          attach="attributes-color"
+          args={[colors, 3]}
         />
-      </mesh>
-    </group>
+      </bufferGeometry>
+      <pointsMaterial
+        size={0.12}
+        vertexColors
+        transparent
+        opacity={0.65}
+        sizeAttenuation
+        depthWrite={false}
+      />
+    </points>
   );
 }
 
@@ -204,7 +202,7 @@ export default function Scene() {
         <pointLight position={[-3, 2, -1]} intensity={1.5} color="#590707" />
         
         <AmbientDust />
-        <HolographicVinyl />
+        <SoundWaves />
         <GridFloor />
         <CameraRig />
       </Canvas>
