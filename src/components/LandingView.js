@@ -16,33 +16,6 @@ function HudBracket() {
   );
 }
 
-function AudioVisualizer() {
-  return (
-    <div className="flex items-end gap-[3px] h-10 px-3 bg-white/5 border border-white/10 rounded-xl relative overflow-hidden w-full max-w-[160px] justify-center">
-      <div className="absolute top-[2px] right-2 text-[6px] text-[#ff8080]/30 font-mono tracking-widest leading-none">FREQ_SIG_IN</div>
-      {Array.from({ length: 16 }).map((_, i) => {
-        const delays = ['0.1s', '0.4s', '0.2s', '0.6s', '0.3s', '0.7s', '0.5s', '0.2s', '0.4s', '0.1s', '0.3s', '0.5s', '0.7s', '0.2s', '0.6s', '0.4s'];
-        const heights = ['h-2', 'h-4', 'h-6', 'h-8', 'h-5', 'h-7', 'h-3', 'h-9', 'h-6', 'h-8', 'h-4', 'h-7', 'h-3', 'h-9', 'h-5', 'h-2'];
-        return (
-          <div 
-            key={i} 
-            style={{ 
-              animationDelay: delays[i],
-              animation: 'visualizerPulse 1.2s ease-in-out infinite' 
-            }}
-            className={`w-[4px] bg-[#C0392B] rounded-full ${heights[i]}`} 
-          />
-        );
-      })}
-      <style>{`
-        @keyframes visualizerPulse {
-          0%, 100% { transform: scaleY(0.4); opacity: 0.6; }
-          50% { transform: scaleY(1.1); opacity: 1; filter: drop-shadow(0 0 3px #C0392B); }
-        }
-      `}</style>
-    </div>
-  );
-}
 
 export default function LandingView() {
   const { setPhase, setActiveSrv, scrollProgress } = useFormStore();
@@ -95,7 +68,7 @@ export default function LandingView() {
           
           <div className="relative z-10 text-center flex flex-col items-center">
             <span className="inline-block bg-[#590707]/30 border border-[#C0392B]/50 text-[#ff8080] text-[9px] font-mono tracking-[0.2em] px-4 py-1.5 rounded-md mb-6 uppercase">
-              {"// ACCESO_AUTORIZADO: INICIAR_DIAGNÓSTICO"}
+              BIENVENIDO AL MOVIMIENTO
             </span>
             
             <h1 className="text-3xl sm:text-4xl font-black leading-[0.9] tracking-tighter uppercase text-white mb-6">
@@ -105,7 +78,7 @@ export default function LandingView() {
             </h1>
             
             <p className="text-xs text-white/55 leading-relaxed mb-8 max-w-md font-mono">
-              Somos Kapital Music, tu aliado estratégico en el desarrollo artístico. Te ayudamos a potenciar tu carrera integrando producción musical, pauta digital, desarrollo de marca y asesoramiento legal, todo estructurado a tu medida de forma rápida y profesional.
+              Somos el equipo que te acompaña a construir una carrera real — estrategia, producción y respaldo legal desde el día uno.
             </p>
 
             {/* Interactive Diagnostic Widget Grid */}
@@ -114,7 +87,7 @@ export default function LandingView() {
                 { target: 50, prefix: "+", label: "Artistas activos", sub: "DIAGNÓSTICO_OK" },
                 { target: 250, prefix: "+", label: "Canciones producidas", sub: "MASTER_STREAM" },
                 { target: 15, prefix: "", label: "Años en el mercado", sub: "CAPITAL_ASSET" },
-                { target: null, widget: <AudioVisualizer />, label: "Entrada de señal", sub: "STEREO_IN" },
+                { target: null, widget: <span className="text-2xl">🌎</span>, label: "Visibilidad internacional", sub: "GLOBAL_PRESENCE" },
               ].map((s, i) => (
                 <div key={i} className="relative bg-white/5 border border-white/10 rounded-2xl p-4 shadow-[inset_0_0_10px_rgba(255,255,255,0.02)]">
                   <div className="absolute top-2 right-3 text-[7px] font-mono text-white/30 tracking-widest">{s.sub}</div>
@@ -135,7 +108,7 @@ export default function LandingView() {
                 onClick={() => setPhase('form')}
                 className="bg-gradient-to-r from-[#590707] to-[#8a0c0c] hover:from-[#8a0c0c] hover:to-[#C0392B] text-white font-extrabold uppercase tracking-wider py-4 px-8 rounded-xl shadow-[0_0_20px_rgba(192,57,43,0.4)] active:scale-95 transition-all duration-300 pointer-events-auto text-xs"
               >
-                Comenzar Asesoría Personalizada →
+                Quiero mi propuesta →
               </button>
               <div className="text-[9px] font-mono text-white/40 mt-4 sm:hidden flex items-center justify-center gap-1.5 animate-bounce">
                 <span>↓ Desliza para explorar</span>
@@ -156,7 +129,7 @@ export default function LandingView() {
           
           <div className="flex flex-col gap-4">
             <span className="self-start bg-[#590707]/30 border border-[#C0392B]/50 text-[#ff8080] text-[8px] font-mono tracking-widest px-3 py-1 rounded-md uppercase">
-              {"// ARCHIVO_SISTEMA: HISTORIA"}
+              NUESTRA HISTORIA
             </span>
             <h2 className="text-2xl font-black tracking-tight leading-none text-white uppercase mt-2">
               15 años construyendo<br />
@@ -186,13 +159,13 @@ export default function LandingView() {
           <HudBracket />
           
           <span className="inline-block bg-[#590707]/30 border border-[#C0392B]/50 text-[#ff8080] text-[8px] font-mono tracking-widest px-2.5 py-1 rounded mb-3 uppercase">
-            {"// CONSOLA: MEZCLADOR_INTERACTIVO"}
+            POR QUÉ KAPITAL
           </span>
           <h2 className="text-2xl font-black tracking-tight leading-none text-white uppercase mb-2">
-            Ecosistema Kapital
+            Un ecosistema <span className="text-[#C0392B]">completo para ti.</span>
           </h2>
-          <p className="text-xs text-white/40 leading-relaxed mb-6 font-mono">
-            Usa los faders y toca los canales para explorar e iluminar nuestros servicios de desarrollo artístico en tiempo real.
+          <p className="text-xs text-white/55 leading-relaxed mb-4 font-mono">
+            Kapital conecta cada pieza de tu carrera artística en un solo lugar — producción, estrategia, protección legal y visibilidad, todo trabajando en sincronía para que tú solo te enfoques en crear. <span className="text-white/30 italic">(Usa los faders y toca los canales para explorar en tiempo real)</span>
           </p>
 
           <Ecosystem onServiceClick={(idx) => { setActiveSrv(idx); setPhase('services'); }} />
@@ -211,9 +184,9 @@ export default function LandingView() {
           <div className="px-6 mb-4 flex justify-between items-center">
             <div>
               <span className="inline-block bg-[#590707]/30 border border-[#C0392B]/30 text-[#ff8080] text-[8px] font-mono tracking-widest px-2.5 py-1 rounded uppercase mb-1">
-                {"// DATA_STREAM: RELEASES"}
+                +250 CANCIONES PRODUCIDAS
               </span>
-              <p className="text-[10px] text-white/50 font-mono">Catálogo activo y lanzamientos del sello</p>
+              <p className="text-[10px] text-white/50 font-mono">Parte del catálogo que hemos construido</p>
             </div>
             <div className="text-[8px] font-mono text-white/30">COUNT: 250+</div>
           </div>
@@ -226,7 +199,7 @@ export default function LandingView() {
                   key={i} 
                   src={url} 
                   alt={"lanzamiento a " + i} 
-                  className="w-20 h-20 rounded-xl object-cover border border-white/10 shadow-lg flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300"
+                  className="w-20 h-20 rounded-xl object-cover border border-white/10 shadow-lg flex-shrink-0 transition-all duration-300"
                   onError={e => { e.target.style.display = "none"; }} 
                 />
               ))}
@@ -241,7 +214,7 @@ export default function LandingView() {
                   key={i} 
                   src={url} 
                   alt={"lanzamiento b " + i} 
-                  className="w-20 h-20 rounded-xl object-cover border border-white/10 shadow-lg flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300"
+                  className="w-20 h-20 rounded-xl object-cover border border-white/10 shadow-lg flex-shrink-0 transition-all duration-300"
                   onError={e => { e.target.style.display = "none"; }} 
                 />
               ))}
@@ -258,20 +231,20 @@ export default function LandingView() {
         <div className="bg-gradient-to-br from-[#590707]/80 to-[#2a0303]/90 backdrop-blur-md border border-[#590707]/50 px-6 py-8 rounded-3xl text-center flex flex-col items-center relative overflow-hidden">
           <HudBracket />
           <span className="inline-block bg-black/40 border border-white/15 text-white/50 text-[8px] font-mono tracking-widest px-3 py-1 rounded mb-4 uppercase">
-            {"// SISTEMA: LISTO"}
+            ¿LISTO?
           </span>
           <h2 className="text-2xl font-black tracking-tight leading-none text-white uppercase mb-2">
-            Inicia tu desarrollo
+            Construyamos tu carrera juntos
           </h2>
           <p className="text-xs text-white/60 leading-relaxed mb-6 max-w-sm font-mono">
-            Completando el cuestionario obtendrás una propuesta de desarrollo de carrera y cotización a tu medida bajo nuestra supervisión.
+            Completa el formulario y te armamos una propuesta personalizada con precios exactos. Sin compromisos.
           </p>
           
           <button 
             onClick={() => setPhase('form')}
             className="bg-white hover:bg-white/90 text-[#590707] font-black uppercase tracking-wider py-4 px-8 rounded-xl active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.2)] transition-all duration-300 pointer-events-auto text-xs"
           >
-            Comenzar Asesoría Personalizada →
+            Comenzar ahora →
           </button>
         </div>
       </section>

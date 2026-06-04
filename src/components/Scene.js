@@ -40,6 +40,16 @@ function HolographicVinyl() {
   const scrollProgress = useFormStore(state => state.scrollProgress);
   const phase = useFormStore(state => state.phase);
 
+  const groovesMaterial = useMemo(() => {
+    return new THREE.MeshStandardMaterial({
+      color: "#C0392B",
+      emissive: "#C0392B",
+      emissiveIntensity: 1.2,
+      roughness: 0.1,
+      metalness: 0.95
+    });
+  }, []);
+
   const tilt = useMemo(() => {
     if (phase !== 'landing') return 0.5; // Default tilt
     // Tilts slightly more as the user scrolls
@@ -59,9 +69,24 @@ function HolographicVinyl() {
       // Tilt transition based on scroll
       vinylRef.current.rotation.x = THREE.MathUtils.lerp(vinylRef.current.rotation.x, tilt, 0.05);
       
-      // Pulse scale slightly on time to represent soundwaves (more subtle)
-      const pulse = 1.0 + Math.sin(elapsed * 1.8) * 0.008;
+      // Simulated audio waveform: bass beats + mid vibration + treble ripples
+      const bass = Math.sin(elapsed * 6.5) * 0.035;
+      const mid = Math.cos(elapsed * 16.0) * 0.009;
+      const treble = Math.sin(elapsed * 32.0) * 0.003;
+      const pulse = 1.0 + bass + mid + treble;
+      
+      // Scale pulse representation of sound energy
       vinylRef.current.scale.set(pulse, pulse, pulse);
+
+      // Piston-like speaker vibration along the Y-axis (bobbing)
+      const vibration = Math.sin(elapsed * 6.5) * 0.05 + Math.cos(elapsed * 13.0) * 0.015;
+      vinylRef.current.position.y = vibration;
+
+      // Glow pulse on grooves simulating soundwave dynamic ranges
+      if (groovesMaterial) {
+        const beat = Math.sin(elapsed * 6.5) * 0.7 + Math.cos(elapsed * 16.0) * 0.35;
+        groovesMaterial.emissiveIntensity = Math.max(0.5, 1.2 + beat);
+      }
     }
   });
 
@@ -79,15 +104,13 @@ function HolographicVinyl() {
 
       {/* Glossy grooves grooves representation (Thin torus layers) */}
       {[1.9, 1.6, 1.3, 1.0].map((r, i) => (
-        <mesh key={i} position={[0, 0.026, 0]} rotation={[Math.PI / 2, 0, 0]}>
+        <mesh 
+          key={i} 
+          position={[0, 0.026, 0]} 
+          rotation={[Math.PI / 2, 0, 0]}
+          material={groovesMaterial}
+        >
           <torusGeometry args={[r, 0.006, 4, 64]} />
-          <meshStandardMaterial 
-            color="#C0392B" 
-            emissive="#590707"
-            emissiveIntensity={1.2}
-            roughness={0.1}
-            metalness={0.95}
-          />
         </mesh>
       ))}
 
