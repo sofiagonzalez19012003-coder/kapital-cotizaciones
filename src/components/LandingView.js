@@ -26,24 +26,24 @@ export default function LandingView() {
 
   const faqs = [
     {
-      q: "¿Ofrecen revisiones en las producciones o mezclas?",
-      a: "Sí, todos nuestros servicios de producción y mezcla/máster incluyen hasta 3 rondas de revisiones completas para asegurar que el tema suene exactamente como lo imaginaste."
+      q: "¿Cómo sé si mi música ya está lista para sonar profesional?",
+      a: "Si sientes que tu demo suena vacío o con poco volumen al compararlo con canciones en Spotify, le falta mezcla y máster profesional. Nosotros te ayudamos a darle ese sonido comercial competitivo."
     },
     {
-      q: "¿Qué archivos recibo al finalizar mi proyecto?",
-      a: "Recibes el máster final en alta definición (.WAV de 24 bits y .MP3 de 320kbps), además de la pista instrumental, la pista a capela limpia y los stems (canales separados) si solicitas un paquete completo."
+      q: "¿Qué necesito llevar para grabar en el estudio?",
+      a: "Solo necesitas traer tu pista en formato digital (.WAV o .MP3) y la letra de tu canción escrita o memorizada. Nosotros ponemos los mejores micrófonos Neumann, audífonos profesionales y el espacio acústico optimizado."
     },
     {
-      q: "¿Cuánto tiempo tarda la entrega de un trabajo?",
-      a: "El servicio de Mezcla & Mastering se entrega en 72 horas hábiles. Las producciones musicales completas toman de 1 a 2 semanas, coordinando las sesiones de grabación en nuestros estudios."
+      q: "¿La producción musical incluye la mezcla y el máster?",
+      a: "Sí, cuando produces una canción completa con nosotros (con TunyD o Money Makers), el paquete ya te incluye la mezcla del tema y la masterización final. Recibes el producto listo para su lanzamiento."
     },
     {
-      q: "¿En qué géneros musicales se especializan?",
-      a: "Nos especializamos en géneros urbanos y comerciales: Reggaetón, Trap, Rap, Hip-Hop, R&B, Afrobeats y Pop urbano. Contamos con productores e ingenieros experimentados en cada nicho."
+      q: "¿Cómo se dividen las regalías de una canción (Split Sheet)?",
+      a: "Es un documento simple donde los autores y productores firman el porcentaje que le toca a cada uno por la autoría y la grabación. Es obligatorio para que distribuidoras como DistroKid o ONErpm te paguen tu parte justa."
     },
     {
-      q: "¿Cómo funciona el proceso de contratación?",
-      a: "Eliges tus servicios en este portal para ver tu cotización estimada. Luego, agendamos una videollamada para afinar detalles y establecer el cronograma. Iniciamos el trabajo con un depósito del 50%."
+      q: "¿Es obligatorio pagar publicidad para que me escuchen?",
+      a: "No es obligatorio, pero la publicidad digital (pauta en Instagram y TikTok) es el camino más rápido y efectivo para salir del círculo de tus amigos y llegar a miles de oyentes reales que no te conocen en la música urbana."
     }
   ];
 
@@ -92,132 +92,8 @@ export default function LandingView() {
         </div>
       </section>
 
-      {/* ──────────────── SECTION 2: NUESTROS SERVICIOS (Bento Grid) ──────────────── */}
-      <section id="servicios" className="w-full flex flex-col gap-8 scroll-mt-24">
-        <div className="flex flex-col gap-2 max-w-xl">
-          <span className="self-start bg-white/5 border border-white/10 text-white/40 text-[9px] font-mono tracking-[0.2em] px-3 py-1 rounded uppercase">
-            QUÉ HACEMOS
-          </span>
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-white uppercase tracking-tight">
-            Nuestros <span className="text-[#C0392B]">Servicios.</span>
-          </h2>
-          <p className="text-xs md:text-sm text-white/55 font-sans leading-relaxed">
-            Llevamos tu sonido al siguiente nivel integrando producción de élite, post-producción, asesoramiento legal y aceleración de audiencias.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-6 gap-6 w-full">
-          {/* Card 1: Producción (col-span-3) */}
-          <div className="group bg-neutral-950/40 backdrop-blur-md border border-white/5 rounded-2xl p-6 flex flex-col justify-between min-h-[220px] relative hover:border-[#C0392B]/40 transition-all duration-300 hover:shadow-[0_0_30px_rgba(192,57,43,0.1)] md:col-span-3">
-            <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#C0392B]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            <div>
-              <div className="text-2xl mb-4 bg-white/5 w-10 h-10 rounded-xl flex items-center justify-center border border-white/5 group-hover:border-[#C0392B]/30 group-hover:bg-[#C0392B]/10 transition-all duration-300">🎵</div>
-              <h3 className="text-lg font-display font-semibold text-white uppercase mb-2">Producción Musical</h3>
-              <p className="text-xs text-white/50 leading-relaxed font-sans">Beatmaking, arreglos y dirección integral con TunyD y Money Makers. Creamos tu sonido desde cero.</p>
-            </div>
-            <button onClick={() => { setActiveSrv(4); setPhase('services'); }} className="text-[9px] font-mono text-[#ff8080] tracking-widest uppercase text-left mt-6 hover:text-white transition-colors flex items-center gap-1">
-              ABRIR CANAL <span className="group-hover:translate-x-1 transition-transform">→</span>
-            </button>
-          </div>
-
-          {/* Card 2: Alquiler de Estudios (col-span-3) */}
-          <div className="group bg-neutral-950/40 backdrop-blur-md border border-white/5 rounded-2xl p-6 flex flex-col justify-between min-h-[220px] relative hover:border-[#C0392B]/40 transition-all duration-300 hover:shadow-[0_0_30px_rgba(192,57,43,0.1)] md:col-span-3">
-            <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#C0392B]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            <div>
-              <div className="text-2xl mb-4 bg-white/5 w-10 h-10 rounded-xl flex items-center justify-center border border-white/5 group-hover:border-[#C0392B]/30 group-hover:bg-[#C0392B]/10 transition-all duration-300">🎙️</div>
-              <h3 className="text-lg font-display font-semibold text-white uppercase mb-2">Alquiler de Estudios</h3>
-              <p className="text-xs text-white/50 leading-relaxed font-sans">Salas acústicamente calibradas (Estudio A y B) con equipamiento analógico premium para capturas impecables.</p>
-            </div>
-            <button onClick={() => { setActiveSrv(0); setPhase('services'); }} className="text-[9px] font-mono text-[#ff8080] tracking-widest uppercase text-left mt-6 hover:text-white transition-colors flex items-center gap-1">
-              ABRIR CANAL <span className="group-hover:translate-x-1 transition-transform">→</span>
-            </button>
-          </div>
-
-          {/* Card 3: Mezcla & Mastering (col-span-2) */}
-          <div className="group bg-neutral-950/40 backdrop-blur-md border border-white/5 rounded-2xl p-6 flex flex-col justify-between min-h-[200px] relative hover:border-[#C0392B]/40 transition-all duration-300 hover:shadow-[0_0_30px_rgba(192,57,43,0.1)] md:col-span-2">
-            <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#C0392B]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            <div>
-              <div className="text-2xl mb-4 bg-white/5 w-10 h-10 rounded-xl flex items-center justify-center border border-white/5 group-hover:border-[#C0392B]/30 group-hover:bg-[#C0392B]/10 transition-all duration-300">🎚️</div>
-              <h3 className="text-lg font-display font-semibold text-white uppercase mb-2">Mezcla & Mastering</h3>
-              <p className="text-xs text-white/50 leading-relaxed font-sans">Llevamos tus tomas de audio al estándar de la radio y plataformas. Sumado analógico y masterización en 72h.</p>
-            </div>
-            <button onClick={() => { setActiveSrv(2); setPhase('services'); }} className="text-[9px] font-mono text-[#ff8080] tracking-widest uppercase text-left mt-6 hover:text-white transition-colors flex items-center gap-1">
-              ABRIR CANAL <span className="group-hover:translate-x-1 transition-transform">→</span>
-            </button>
-          </div>
-
-          {/* Card 4: Asesoría Legal (col-span-2) */}
-          <div className="group bg-neutral-950/40 backdrop-blur-md border border-white/5 rounded-2xl p-6 flex flex-col justify-between min-h-[200px] relative hover:border-[#C0392B]/40 transition-all duration-300 hover:shadow-[0_0_30px_rgba(192,57,43,0.1)] md:col-span-2">
-            <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#C0392B]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            <div>
-              <div className="text-2xl mb-4 bg-white/5 w-10 h-10 rounded-xl flex items-center justify-center border border-white/5 group-hover:border-[#C0392B]/30 group-hover:bg-[#C0392B]/10 transition-all duration-300">⚖️</div>
-              <h3 className="text-lg font-display font-semibold text-white uppercase mb-2">Asesoría Legal</h3>
-              <p className="text-xs text-white/50 leading-relaxed font-sans">Protege tu catálogo artístico. Registro DNDA, split sheets, acuerdos comerciales y contratos profesionales.</p>
-            </div>
-            <button onClick={() => { setActiveSrv(1); setPhase('services'); }} className="text-[9px] font-mono text-[#ff8080] tracking-widest uppercase text-left mt-6 hover:text-white transition-colors flex items-center gap-1">
-              ABRIR CANAL <span className="group-hover:translate-x-1 transition-transform">→</span>
-            </button>
-          </div>
-
-          {/* Card 5: Marketing 30 (col-span-2) */}
-          <div className="group bg-neutral-950/40 backdrop-blur-md border border-white/5 rounded-2xl p-6 flex flex-col justify-between min-h-[200px] relative hover:border-[#C0392B]/40 transition-all duration-300 hover:shadow-[0_0_30px_rgba(192,57,43,0.1)] md:col-span-2">
-            <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#C0392B]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            <div>
-              <div className="text-2xl mb-4 bg-white/5 w-10 h-10 rounded-xl flex items-center justify-center border border-white/5 group-hover:border-[#C0392B]/30 group-hover:bg-[#C0392B]/10 transition-all duration-300">📲</div>
-              <h3 className="text-lg font-display font-semibold text-white uppercase mb-2">Marketing 30</h3>
-              <p className="text-xs text-white/50 leading-relaxed font-sans">Campañas de conversión en Meta Ads y TikTok para escalar tus streams en Spotify y viralizar tu presencia de marca.</p>
-            </div>
-            <button onClick={() => { setActiveSrv(3); setPhase('services'); }} className="text-[9px] font-mono text-[#ff8080] tracking-widest uppercase text-left mt-6 hover:text-white transition-colors flex items-center gap-1">
-              ABRIR CANAL <span className="group-hover:translate-x-1 transition-transform">→</span>
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* ──────────────── SECTION 3: ECOSYSTEM & VALUES ──────────────── */}
-      <section id="sobre-nosotros" className="w-full flex flex-col gap-10 scroll-mt-24">
-        <div className="flex flex-col gap-2 max-w-xl">
-          <span className="self-start bg-white/5 border border-white/10 text-white/40 text-[9px] font-mono tracking-[0.2em] px-3 py-1 rounded uppercase">
-            FILOSOFÍA
-          </span>
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-white uppercase tracking-tight">
-            Un Ecosistema <span className="text-[#C0392B]">completo para ti.</span>
-          </h2>
-          <p className="text-xs md:text-sm text-white/55 font-sans leading-relaxed">
-            Conectamos cada pieza de tu carrera artística en un solo lugar para que tú solo te enfoques en lo que importa: crear.
-          </p>
-        </div>
-
-        {/* Mixer console integrated widget */}
-        <div className="relative bg-neutral-950/40 backdrop-blur-md border border-white/5 rounded-3xl p-6 w-full hover:border-[#C0392B]/20 transition-all duration-300">
-          <HudBracket />
-          <p className="text-[9px] text-[#ff8080] font-mono mb-6 uppercase text-center tracking-widest">
-            {"// Usa los faders y toca los canales de la consola en tiempo real"}
-          </p>
-          <Ecosystem onServiceClick={(idx) => { setActiveSrv(idx); setPhase('services'); }} />
-        </div>
-
-        {/* Values Bento Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
-          <div className="bg-neutral-950/20 backdrop-blur-md border border-white/5 rounded-xl p-5 hover:border-white/10 transition-colors duration-300">
-            <h4 className="text-xs font-display font-semibold text-[#ff8080] tracking-wider uppercase mb-2">Vision</h4>
-            <p className="text-[11px] text-white/50 leading-relaxed font-sans">Damos forma a tus ideas para que tu música se sienta intencional, duradera y potente.</p>
-          </div>
-          <div className="bg-neutral-950/20 backdrop-blur-md border border-white/5 rounded-xl p-5 hover:border-white/10 transition-colors duration-300">
-            <h4 className="text-xs font-display font-semibold text-[#ff8080] tracking-wider uppercase mb-2">Craft</h4>
-            <p className="text-[11px] text-white/50 leading-relaxed font-sans">Desde el diseño sonoro al master final, trabajamos con precisión milimétrica en cada canal.</p>
-          </div>
-          <div className="bg-neutral-950/20 backdrop-blur-md border border-white/5 rounded-xl p-5 hover:border-white/10 transition-colors duration-300">
-            <h4 className="text-xs font-display font-semibold text-[#ff8080] tracking-wider uppercase mb-2">Trust</h4>
-            <p className="text-[11px] text-white/50 leading-relaxed font-sans">Transparencia absoluta, plazos de entrega estrictos y compromisos cumplidos sin rodeos.</p>
-          </div>
-          <div className="bg-neutral-950/20 backdrop-blur-md border border-white/5 rounded-xl p-5 hover:border-white/10 transition-colors duration-300">
-            <h4 className="text-xs font-display font-semibold text-[#ff8080] tracking-wider uppercase mb-2">Energy</h4>
-            <p className="text-[11px] text-white/50 leading-relaxed font-sans">Creamos producciones con impacto, diseñadas para transmitir vibración y conectar al instante.</p>
-          </div>
-        </div>
-
-        {/* Stats metrics block */}
+      {/* ──────────────── SECTION 2: METRICAS / STATS (Métricas Generales) ──────────────── */}
+      <section className="w-full">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
           {[
             { target: 15, prefix: "", label: "Años en la música" },
@@ -239,37 +115,7 @@ export default function LandingView() {
         </div>
       </section>
 
-      {/* ──────────────── SECTION 4: HISTORIA ──────────────── */}
-      <section className="w-full relative">
-        <div className="absolute w-[300px] h-[300px] rounded-full bg-red-500/5 blur-[80px] -right-12 z-0 pointer-events-none" />
-        <div className="relative py-10 px-8 bg-neutral-950/40 backdrop-blur-md border border-white/5 shadow-[0_0_30px_rgba(89,7,7,0.1)] rounded-3xl w-full hover:border-white/10 transition-colors duration-300">
-          <HudBracket />
-          
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
-            <div className="md:col-span-5 flex flex-col gap-4">
-              <span className="self-start bg-[#590707]/30 border border-[#C0392B]/40 text-[#ff8080] text-[9px] font-mono tracking-widest px-3 py-1 rounded-md uppercase">
-                NUESTRA HISTORIA
-              </span>
-              <h2 className="text-2xl md:text-3xl font-display font-bold tracking-tight leading-none text-white uppercase">
-                15 años construyendo<br />
-                carreras <span className="text-[#C0392B]">reales.</span>
-              </h2>
-            </div>
-            
-            <div className="md:col-span-7 flex flex-col gap-4 text-xs text-white/60 leading-relaxed font-sans">
-              <p>
-                Kapital Music lleva más de 15 años liderando en la industria urbana. Hemos impulsado y desarrollado proyectos de más de 50 artistas activos y producido más de 250 canciones, cruzando fronteras continentales.
-              </p>
-              
-              <p>
-                No somos un eslabón suelto. Somos la estructura integral de desarrollo: estudios, estrategia de pauta, producción de beats y consultoría jurídica de nivel élite. Todo consolidado bajo una misma dirección.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ──────────────── SECTION 5: LANZAMIENTOS (Covers Grid) ──────────────── */}
+      {/* ──────────────── SECTION 3: LANZAMIENTOS (Catálogo Producido) ──────────────── */}
       <section id="lanzamientos" className="w-full scroll-mt-24">
         <div className="relative py-8 bg-neutral-950/40 border border-white/5 backdrop-blur-md rounded-3xl overflow-hidden hover:border-white/10 transition-colors duration-300">
           <HudBracket />
@@ -278,7 +124,7 @@ export default function LandingView() {
               <span className="inline-block bg-[#590707]/30 border border-[#C0392B]/30 text-[#ff8080] text-[9px] font-mono tracking-widest px-2.5 py-1 rounded uppercase mb-2">
                 +250 CANCIONES PRODUCIDAS
               </span>
-              <h2 className="text-lg font-display font-semibold uppercase text-white">Parte del catálogo que hemos construido</h2>
+              <h2 className="text-lg font-display font-semibold uppercase text-white">Catálogo que hemos construido</h2>
             </div>
             <div className="text-[9px] font-mono text-white/30 uppercase tracking-widest border border-white/5 bg-white/[0.02] px-3 py-1.5 rounded-lg">COUNT: 250+</div>
           </div>
@@ -317,12 +163,88 @@ export default function LandingView() {
         </div>
       </section>
 
+      {/* ──────────────── SECTION 4: HISTORIA (Nuestra Historia) ──────────────── */}
+      <section id="sobre-nosotros" className="w-full relative scroll-mt-24">
+        <div className="absolute w-[300px] h-[300px] rounded-full bg-red-500/5 blur-[80px] -right-12 z-0 pointer-events-none" />
+        <div className="relative py-10 px-8 bg-neutral-950/40 backdrop-blur-md border border-white/5 shadow-[0_0_30px_rgba(89,7,7,0.1)] rounded-3xl w-full hover:border-white/10 transition-colors duration-300">
+          <HudBracket />
+          
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+            <div className="md:col-span-5 flex flex-col gap-4">
+              <span className="self-start bg-[#590707]/30 border border-[#C0392B]/40 text-[#ff8080] text-[9px] font-mono tracking-widest px-3 py-1 rounded-md uppercase">
+                NUESTRA HISTORIA
+              </span>
+              <h2 className="text-2xl md:text-3xl font-display font-bold tracking-tight leading-none text-white uppercase">
+                15 años construyendo<br />
+                carreras <span className="text-[#C0392B]">reales.</span>
+              </h2>
+            </div>
+            
+            <div className="md:col-span-7 flex flex-col gap-4 text-xs text-white/60 leading-relaxed font-sans">
+              <p>
+                Kapital Music lleva más de 15 años liderando en la industria urbana. Hemos impulsado y desarrollado proyectos de más de 50 artistas activos y producido más de 250 canciones, cruzando fronteras continentales.
+              </p>
+              
+              <p>
+                No somos un eslabón suelto. Somos la estructura integral de desarrollo: estudios, estrategia de pauta, producción de beats y consultoría jurídica de nivel élite. Todo consolidado bajo una misma dirección.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ──────────────── SECTION 5: SERVICIOS (Consola Unificada) ──────────────── */}
+      <section id="servicios" className="w-full flex flex-col gap-10 scroll-mt-24">
+        <div className="flex flex-col gap-2 max-w-xl">
+          <span className="self-start bg-white/5 border border-white/10 text-white/40 text-[9px] font-mono tracking-[0.2em] px-3 py-1 rounded uppercase">
+            NUESTROS SERVICIOS
+          </span>
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-white uppercase tracking-tight">
+            Ecosistema <span className="text-[#C0392B]">Kapital Music.</span>
+          </h2>
+          <p className="text-xs md:text-sm text-white/55 font-sans leading-relaxed">
+            Manipula los faders de la consola en tiempo real para explorar el subtexto y ver la galería de imágenes reales de cada servicio técnico y creativo.
+          </p>
+        </div>
+
+        {/* Mixer console integrated widget */}
+        <div className="relative bg-neutral-950/40 backdrop-blur-md border border-white/5 rounded-3xl p-6 w-full hover:border-[#C0392B]/20 transition-all duration-300">
+          <HudBracket />
+          <p className="text-[9px] text-[#ff8080] font-mono mb-6 uppercase text-center tracking-widest">
+            {"// Faders verticales activos — Selecciona tu canal"}
+          </p>
+          <Ecosystem onServiceClick={(idx) => { setActiveSrv(idx); setPhase('services'); }} />
+        </div>
+      </section>
+
       {/* ──────────────── SECTION 6: LA CASA (Studio Gallery) ──────────────── */}
       <section className="w-full">
         <LaCasa />
       </section>
 
-      {/* ──────────────── SECTION 7: TESTIMONIOS (Testimonials) ──────────────── */}
+      {/* ──────────────── SECTION 7: VALORES (Bento de Valores) ──────────────── */}
+      <section className="w-full flex flex-col gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
+          <div className="bg-neutral-950/20 backdrop-blur-md border border-white/5 rounded-xl p-5 hover:border-white/10 transition-colors duration-300">
+            <h4 className="text-xs font-display font-semibold text-[#ff8080] tracking-wider uppercase mb-2">Vision</h4>
+            <p className="text-[11px] text-white/50 leading-relaxed font-sans">Damos forma a tus ideas para que tu música se sienta intencional, duradera y potente.</p>
+          </div>
+          <div className="bg-neutral-950/20 backdrop-blur-md border border-white/5 rounded-xl p-5 hover:border-white/10 transition-colors duration-300">
+            <h4 className="text-xs font-display font-semibold text-[#ff8080] tracking-wider uppercase mb-2">Craft</h4>
+            <p className="text-[11px] text-white/50 leading-relaxed font-sans">Desde el diseño sonoro al master final, trabajamos con precisión milimétrica en cada canal.</p>
+          </div>
+          <div className="bg-neutral-950/20 backdrop-blur-md border border-white/5 rounded-xl p-5 hover:border-white/10 transition-colors duration-300">
+            <h4 className="text-xs font-display font-semibold text-[#ff8080] tracking-wider uppercase mb-2">Trust</h4>
+            <p className="text-[11px] text-white/50 leading-relaxed font-sans">Transparencia absoluta, plazos de entrega estrictos y compromisos cumplidos sin rodeos.</p>
+          </div>
+          <div className="bg-neutral-950/20 backdrop-blur-md border border-white/5 rounded-xl p-5 hover:border-white/10 transition-colors duration-300">
+            <h4 className="text-xs font-display font-semibold text-[#ff8080] tracking-wider uppercase mb-2">Energy</h4>
+            <p className="text-[11px] text-white/50 leading-relaxed font-sans">Creamos producciones con impacto, diseñadas para transmitir vibración y conectar al instante.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* ──────────────── SECTION 8: TESTIMONIOS (Testimonials) ──────────────── */}
       <section className="w-full flex flex-col gap-8">
         <div className="flex flex-col gap-2 max-w-xl">
           <span className="self-start bg-white/5 border border-white/10 text-white/40 text-[9px] font-mono tracking-[0.2em] px-3 py-1 rounded uppercase">
@@ -363,14 +285,14 @@ export default function LandingView() {
         </div>
       </section>
 
-      {/* ──────────────── SECTION 8: PREGUNTAS FRECUENTES (FAQ Acordeón) ──────────────── */}
+      {/* ──────────────── SECTION 9: PREGUNTAS FRECUENTES (FAQ Acordeón) ──────────────── */}
       <section id="faq" className="w-full flex flex-col gap-8 scroll-mt-24">
         <div className="flex flex-col gap-2 max-w-xl">
           <span className="self-start bg-white/5 border border-white/10 text-white/40 text-[9px] font-mono tracking-[0.2em] px-3 py-1 rounded uppercase">
-            FAQ
+            PREGUNTAS FRECUENTES
           </span>
           <h2 className="text-3xl md:text-4xl font-display font-bold text-white uppercase tracking-tight">
-            ¿Tienes <span className="text-[#C0392B]">Preguntas?</span>
+            Dudas <span className="text-[#C0392B]">Frecuentes.</span>
           </h2>
         </div>
 
@@ -399,7 +321,7 @@ export default function LandingView() {
         </div>
       </section>
 
-      {/* ──────────────── SECTION 9: CTA FINAL (Get In Touch) ──────────────── */}
+      {/* ──────────────── SECTION 10: CTA FINAL (Get In Touch) ──────────────── */}
       <section className="w-full">
         <div className="bg-gradient-to-br from-[#590707]/80 to-[#2a0303]/90 backdrop-blur-md border border-[#590707]/40 px-6 py-12 md:py-16 rounded-3xl text-center flex flex-col items-center relative overflow-hidden">
           <HudBracket />

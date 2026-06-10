@@ -39,48 +39,62 @@ function SoundWaves() {
   const pointsRef = useRef();
   const scrollProgress = useFormStore(state => state.scrollProgress);
 
-  const numLines = 5;
-  const pointsPerLine = 100;
-  const count = numLines * pointsPerLine;
+  const numRows = 3;
+  const numBarsPerRow = 16;
+  const pointsPerBar = 24;
+  const count = numRows * numBarsPerRow * pointsPerBar;
 
-  // Generate wave line points and vertex colors
-  const [positions, colors, initialX, lineIndices] = useMemo(() => {
+  // Generate equalizer bar points and vertex colors
+  const [positions, colors, rowIndices, barIndices, pointIndices] = useMemo(() => {
     const pos = new Float32Array(count * 3);
     const cols = new Float32Array(count * 3);
-    const initX = new Float32Array(count);
-    const lineInd = new Float32Array(count);
-
-    const baseColors = [
-      new THREE.Color("#C0392B"), // Rojo Kapital
-      new THREE.Color("#E74C3C"), // Rojo Brillante
-      new THREE.Color("#e63333"), // Rojo Neón
-      new THREE.Color("#8a0c0c"), // Vino Tinto Oscuro
-      new THREE.Color("#ff8080"), // Coral Claro
-    ];
+    const rowInd = new Float32Array(count);
+    const barInd = new Float32Array(count);
+    const pointInd = new Float32Array(count);
 
     let idx = 0;
-    for (let l = 0; l < numLines; l++) {
-      const z = -6.5 + (l - (numLines - 1) / 2) * 1.5;
-      const c = baseColors[l % baseColors.length];
+    for (let r = 0; r < numRows; r++) {
+      // Row Z depth
+      const z = -8.0 + r * 2.0;
 
-      for (let p = 0; p < pointsPerLine; p++) {
-        const x = -8 + (p / (pointsPerLine - 1)) * 16;
-        
-        pos[idx * 3] = x;
-        pos[idx * 3 + 1] = 0;
-        pos[idx * 3 + 2] = z;
+      for (let b = 0; b < numBarsPerRow; b++) {
+        // Bar X position
+        const x = -7.5 + b * 1.0;
 
-        cols[idx * 3] = c.r;
-        cols[idx * 3 + 1] = c.g;
-        cols[idx * 3 + 2] = c.b;
+        for (let v = 0; v < pointsPerBar; v++) {
+          // Vertical Y height
+          const y = -2.4 + (v / (pointsPerBar - 1)) * 4.8;
 
-        initX[idx] = x;
-        lineInd[idx] = l;
-        idx++;
+          pos[idx * 3] = x;
+          pos[idx * 3 + 1] = y;
+          pos[idx * 3 + 2] = z;
+
+          // Color based on height ratio (equalizer style)
+          const ratio = v / (pointsPerBar - 1);
+          let c;
+          if (ratio < 0.3) {
+            c = new THREE.Color("#590707"); // Bottom: Dark Vino
+          } else if (ratio < 0.65) {
+            c = new THREE.Color("#C0392B"); // Mid: Crimson
+          } else if (ratio < 0.88) {
+            c = new THREE.Color("#E74C3C"); // Upper: Bright Red
+          } else {
+            c = new THREE.Color("#ff8080"); // Top: Neon Coral
+          }
+
+          cols[idx * 3] = c.r;
+          cols[idx * 3 + 1] = c.g;
+          cols[idx * 3 + 2] = c.b;
+
+          rowInd[idx] = r;
+          barInd[idx] = b;
+          pointInd[idx] = v;
+          idx++;
+        }
       }
     }
-    return [pos, cols, initX, lineInd];
-  }, [count, numLines, pointsPerLine]);
+    return [pos, cols, rowInd, barInd, pointInd];
+  }, [count, numRows, numBarsPerRow, pointsPerBar]);
 
   const posAttrRef = useRef();
 
@@ -89,25 +103,27 @@ function SoundWaves() {
     if (!posAttrRef.current) return;
     const arr = posAttrRef.current.array;
 
-    // Reacting to user scrolling by changing speed and amplitude
-    const scrollFactor = 1.0 + scrollProgress * 3.5;
+    // Reacting to user scrolling by speeding up and scaling amplitude
+    const scrollFactor = 1.0 + scrollProgress * 2.5;
 
     for (let i = 0; i < count; i++) {
-      const x = initialX[i];
-      const l = lineIndices[i];
+      const r = rowIndices[i];
+      const b = barIndices[i];
+      const v = pointIndices[i];
 
-      // Simulated sound waves frequencies:
-      // Bass beats
-      const bass = Math.sin(x * 0.45 + elapsed * 3.0 * scrollFactor + l * 0.6) * 0.85;
-      // Mid range
-      const mid = Math.cos(x * 1.6 - elapsed * 6.5 + l * 1.2) * 0.28;
-      // High frequency treble
-      const treble = Math.sin(x * 4.2 + elapsed * 15.0) * 0.08;
+      // Bounce level based on row, bar, and time
+      const speed = 4.0 + r * 1.5;
+      const val = Math.sin(b * 0.55 + elapsed * speed * scrollFactor) * 0.35 + 
+                  Math.cos(b * 1.2 - elapsed * (speed * 0.55) + r * 0.7) * 0.25 + 
+                  Math.sin(elapsed * 9.0 + b * 0.3) * 0.1 + 0.5;
 
-      // Parabolic boundary mask to pinch the wave at the screen borders
-      const envelope = Math.max(0, 1.0 - (x * x) / 64.0);
+      // Clamp between 0.08 and 1.0
+      const level = Math.max(0.08, Math.min(1.0, val));
 
-      arr[i * 3 + 1] = (bass + mid + treble) * envelope * 1.3;
+      // Stretch vertically from the bottom baseline
+      // Baseline is Y = -2.4. Height of bar is 4.8.
+      const yBaseRatio = v / (pointsPerBar - 1);
+      arr[i * 3 + 1] = -2.4 + yBaseRatio * 4.8 * level;
     }
     posAttrRef.current.needsUpdate = true;
   });
@@ -126,10 +142,10 @@ function SoundWaves() {
         />
       </bufferGeometry>
       <pointsMaterial
-        size={0.12}
+        size={0.16}
         vertexColors
         transparent
-        opacity={0.65}
+        opacity={0.68}
         sizeAttenuation
         depthWrite={false}
       />

@@ -61,6 +61,40 @@ export default function Ecosystem({ onServiceClick }) {
     }
   ];
 
+  const CL = "https://res.cloudinary.com/dssujt8zt/image/upload/q_auto,f_auto/";
+  const serviceImages = {
+    0: [
+      CL + "estudio-a-1_yitif2",
+      CL + "estudio-a-2_ax1jy5",
+      CL + "estudio-b-1_hlduee",
+      CL + "estudio-b-2_wpzby5"
+    ],
+    1: [
+      CL + "DSC05600_ylryqo",
+      CL + "DSC09145-2_n3jfk8",
+      CL + "DSC09540_qo0mux",
+      CL + "DSC08188_axo980"
+    ],
+    2: [
+      CL + "DSC08964_pwxai2",
+      CL + "DSC09087_iygxrp",
+      CL + "DSC09077_cs0xwa",
+      CL + "DSC09091_gkd66d"
+    ],
+    3: [
+      CL + "DSC09091_gkd66d",
+      CL + "DSC09026_qcghrz",
+      CL + "DSC09017_mxtnrf",
+      CL + "DSC08200_unvjmy"
+    ],
+    4: [
+      CL + "money-makers-1_ezbtfk",
+      CL + "money-makers-3_oba1ls",
+      CL + "tunyd-2_wo2quf",
+      CL + "tunyd-1_sr6wde"
+    ]
+  };
+
   return (
     <div className="my-6 pointer-events-auto max-w-lg mx-auto font-mono text-[11px] w-full">
       <div className="relative bg-neutral-950/80 border border-white/10 rounded-2xl p-5 shadow-2xl flex flex-col gap-6 backdrop-blur-md">
@@ -188,13 +222,30 @@ export default function Ecosystem({ onServiceClick }) {
 
           <button 
             onClick={() => onServiceClick(channels[activeChannel].serviceIdx)}
-            className="inline-flex items-center gap-2 bg-[#590707]/30 hover:bg-[#C0392B]/35 border border-[#C0392B]/50 rounded-lg px-3.5 py-2 transition-all duration-300 pointer-events-auto"
+            className="inline-flex items-center gap-2 bg-[#590707]/30 hover:bg-[#C0392B]/35 border border-[#C0392B]/50 rounded-lg px-3.5 py-2 mb-4 transition-all duration-300 pointer-events-auto"
           >
             <span className="text-[8.5px] font-mono font-bold text-[#ff8080] tracking-widest uppercase">
               VER_DETALLES_SERVICIO
             </span>
             <span className="text-[8.5px] text-[#ff8080]">→</span>
           </button>
+
+          {/* Dynamic real photo gallery at the bottom */}
+          <div className="mt-4 border-t border-white/5 pt-4">
+            <div className="text-[8px] font-mono text-white/30 tracking-widest uppercase mb-2">{"// Galería de fotos reales"}</div>
+            <div className="grid grid-cols-4 gap-2">
+              {serviceImages[activeChannel]?.map((url, i) => (
+                <div key={i} className="aspect-square rounded-lg overflow-hidden border border-white/5 group/img hover:border-[#C0392B]/45 transition-all duration-300">
+                  <img 
+                    src={url} 
+                    alt={`servicios-${activeChannel}-${i}`} 
+                    className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-500"
+                    onError={e => { e.target.style.display = "none"; }} 
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
       </div>
