@@ -89,14 +89,14 @@ export default function FormExtras() {
                 <ProducerCard
                   name="TunyD"
                   price="$8,000,000 COP"
-                  tag="REGGAETÓN / TRAP"
+                  tag="TRAP / URBANO / VERSÁTIL"
                   isSelected={extras.productora === 'tunyD'}
                   onClick={() => setExtraAnswer("TunyD — $8M/sesión")}
                 />
                 <ProducerCard
                   name="Money Makers"
                   price="$10,000,000 COP"
-                  tag="DANCEHALL / URBAN ÉLITE"
+                  tag="TRAP / URBANO / VERSÁTIL"
                   isSelected={extras.productora === 'moneyMakers'}
                   onClick={() => setExtraAnswer("Money Makers — $10M/sesión")}
                 />
