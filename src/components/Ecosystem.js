@@ -21,7 +21,7 @@ export default function Ecosystem({ onServiceClick }) {
       title: "Asesoría Legal",
       tag: "PROTECCIÓN",
       subtitle: "Derechos de autor y contratos",
-      desc: "Protección integral de tu catálogo. Registro en DNDA, afiliación a SAYCO/ACINPRO, y redacción de Split Sheets y contratos comerciales.",
+      desc: "Protección integral de tu catálogo. Registro en DNDA, afiliación a SAYCO/ACINPRO, recaudación de publishing internacional y redacción de Split Sheets y contratos comerciales.",
       faderValue: 70,
       tech: "LEGAL: DNDA_COPYRIGHT_SECURE",
       serviceIdx: 1

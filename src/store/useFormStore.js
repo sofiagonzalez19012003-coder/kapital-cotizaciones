@@ -269,7 +269,7 @@ export const useFormStore = create((set, get) => ({
     const analisisServ = `Los servicios que elegiste — ${serviciosFiltrados.join(', ')} — no son un gasto, son una inversión en la estructura que tu carrera necesita.${serviciosFiltrados.includes('Asesoría legal') ? ' La asesoría legal es urgente: sin ella cualquier contrato o acuerdo puede costarte más de lo que ganaste.' : ''}${serviciosFiltrados.includes('Producción musical completa (incluye mezcla y master)') ? ' La producción con nuestros productores no es solo grabar — es crear el sonido que te posiciona internacionalmente.' : ''}${serviciosFiltrados.includes('Marketing 360') ? ' El Marketing 360 te da visibilidad real: orgánica y pagada, con estrategia y medición desde el día uno.' : ''} Kapital te acompaña en todo desde el primer día.`;
 
     const pasos = [];
-    if (registrado !== 'Sí') pasos.push('Registra tu música ante la DNDA y afíliate a SAYCO/ACINPRO. Nuestro servicio de Asesoría Legal lo resuelve en una sola sesión.');
+    if (registrado !== 'Sí') pasos.push('Registra tu música ante la DNDA, afíliate a SAYCO/ACINPRO y activa la recaudación de publishing internacional. Nuestro servicio de Asesoría Legal lo resuelve en una sola sesión.');
     if (distribuidora === 'No tengo') pasos.push('Configura tu distribuidora digital. En la asesoría te orientamos según tu volumen de lanzamientos.');
     if (serviciosFiltrados.includes('Producción musical completa (incluye mezcla y master)')) pasos.push('Reserva tu sesión de producción — el proceso incluye concepto, grabación, mezcla y master.');
     if (serviciosFiltrados.includes('Marketing 360')) pasos.push('Activar Marketing 360: análisis de presencia digital, pauta Meta y plan de crecimiento orgánico.');

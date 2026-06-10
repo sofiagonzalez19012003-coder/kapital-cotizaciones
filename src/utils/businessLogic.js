@@ -311,7 +311,7 @@ export const SERVICES = [
     desc: "Tu música vale, y merece estar protegida. Te acompañamos en todo el proceso legal para que puedas enfocarte en crear, sabiendo que tu trabajo está blindado.",
     legalInfo: [
       { title: "Registra y protege tu música", items: ["Registro de obra musical en la DNDA", "Registro de fonograma"] },
-      { title: "Afíliate a las entidades que te pagan regalías", items: ["SAYCO", "ACINPRO", "ASCAP"] },
+      { title: "Afíliate a las entidades que te pagan regalías", items: ["SAYCO", "ACINPRO", "ASCAP", "Recaudación de Publishing: ¿Cómo, aún no tienes editora? Revisa nuestras opciones (cobertura internacional)"] },
       { title: "Documentos para tu carrera artística", items: ["Contratos profesionales adaptados a tu realidad como artista", "Split Sheet — define desde el principio quién se lleva qué", "Acuerdos, releases y declaración de puntos de máster"] },
     ],
     imgs: []
