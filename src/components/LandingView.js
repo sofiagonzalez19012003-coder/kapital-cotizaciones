@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useFormStore } from '../store/useFormStore';
 import { PORTADAS_ROW1, PORTADAS_ROW2 } from '../utils/businessLogic';
 import CountUp from './CountUp';
@@ -18,34 +18,10 @@ function HudBracket() {
 
 export default function LandingView() {
   const { setPhase, setActiveSrv } = useFormStore();
-  const [openFaq, setOpenFaq] = useState(null);
 
   const scrollToServices = () => {
     document.getElementById('servicios')?.scrollIntoView({ behavior: 'smooth' });
   };
-
-  const faqs = [
-    {
-      q: "¿Cómo sé si mi música ya está lista para sonar profesional?",
-      a: "Si sientes que tu demo suena vacío o con poco volumen al compararlo con canciones en Spotify, le falta mezcla y máster profesional. Nosotros te ayudamos a darle ese sonido comercial competitivo."
-    },
-    {
-      q: "¿Qué necesito llevar para grabar en el estudio?",
-      a: "Solo necesitas traer tu pista en formato digital (.WAV o .MP3) y la letra de tu canción escrita o memorizada. Nosotros ponemos los mejores micrófonos Neumann, audífonos profesionales y el espacio acústico optimizado."
-    },
-    {
-      q: "¿La producción musical incluye la mezcla y el máster?",
-      a: "Sí, cuando produces una canción completa con nosotros (con TunyD o Money Makers), el paquete ya te incluye la mezcla del tema y la masterización final. Recibes el producto listo para su lanzamiento."
-    },
-    {
-      q: "¿Cómo se dividen las regalías de una canción (Split Sheet)?",
-      a: "Es un documento simple donde los autores y productores firman el porcentaje que le toca a cada uno por la autoría y la grabación. Es obligatorio para que distribuidoras como DistroKid o ONErpm te paguen tu parte justa."
-    },
-    {
-      q: "¿Es obligatorio pagar publicidad para que me escuchen?",
-      a: "No es obligatorio, pero la publicidad digital (pauta en Instagram y TikTok) es el camino más rápido y efectivo para salir del círculo de tus amigos y llegar a miles de oyentes reales que no te conocen en la música urbana."
-    }
-  ];
 
   return (
     <div className="w-full flex flex-col max-w-6xl mx-auto gap-24 px-6 md:px-12 py-10 pointer-events-auto">
@@ -186,7 +162,7 @@ export default function LandingView() {
               </p>
               
               <p>
-                No somos un eslabón suelto. Somos la estructura integral de desarrollo: estudios, estrategia de pauta, producción de beats y consultoría jurídica de nivel élite. Todo consolidado bajo una misma dirección.
+                Somos la Kapital de la música. Somos la estructura integral de desarrollo: estudios, estrategia de pauta, producción de beats y consultoría jurídica. Todo en el mismo lugar.
               </p>
             </div>
           </div>
@@ -244,84 +220,7 @@ export default function LandingView() {
         </div>
       </section>
 
-      {/* ──────────────── SECTION 8: TESTIMONIOS (Testimonials) ──────────────── */}
-      <section className="w-full flex flex-col gap-8">
-        <div className="flex flex-col gap-2 max-w-xl">
-          <span className="self-start bg-white/5 border border-white/10 text-white/40 text-[9px] font-mono tracking-[0.2em] px-3 py-1 rounded uppercase">
-            TESTIMONIOS
-          </span>
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-white uppercase tracking-tight">
-            Lo que dicen <span className="text-[#C0392B]">los artistas.</span>
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full">
-          <div className="bg-neutral-950/40 backdrop-blur-md border border-white/5 rounded-2xl p-6 flex flex-col justify-between hover:border-white/10 transition-colors duration-300">
-            <p className="text-xs text-white/70 leading-relaxed font-sans mb-6">"TunyD transformó mi maqueta en un tema que suena listo para radio nacional. Su atención al detalle y estructura de producción marcó toda la diferencia."</p>
-            <div>
-              <div className="h-[1px] bg-white/5 my-4" />
-              <div className="text-[11px] font-display font-semibold text-white uppercase">Nova Kane</div>
-              <div className="text-[8px] font-mono text-[#ff8080] uppercase tracking-wider mt-1">Midnight Drive</div>
-            </div>
-          </div>
-
-          <div className="bg-neutral-950/40 backdrop-blur-md border border-white/5 rounded-2xl p-6 flex flex-col justify-between hover:border-white/10 transition-colors duration-300">
-            <p className="text-xs text-white/70 leading-relaxed font-sans mb-6">"Trabajar con el equipo de Kapital fue impecable de principio a fin. Comunicación clara y sincera, sin demoras de cronograma y un resultado increíble."</p>
-            <div>
-              <div className="h-[1px] bg-white/5 my-4" />
-              <div className="text-[11px] font-display font-semibold text-white uppercase">Kairo</div>
-              <div className="text-[8px] font-mono text-[#ff8080] uppercase tracking-wider mt-1">Lost in Echoes</div>
-            </div>
-          </div>
-
-          <div className="bg-neutral-950/40 backdrop-blur-md border border-white/5 rounded-2xl p-6 flex flex-col justify-between hover:border-white/10 transition-colors duration-300">
-            <p className="text-xs text-white/70 leading-relaxed font-sans mb-6">"El proceso de masterización final le dio a mi canción ese brillo y pegada comercial que le faltaba. Ahora suena potente y con mucha pegada en plataformas."</p>
-            <div>
-              <div className="h-[1px] bg-white/5 my-4" />
-              <div className="text-[11px] font-display font-semibold text-white uppercase">Lila Ray</div>
-              <div className="text-[8px] font-mono text-[#ff8080] uppercase tracking-wider mt-1">Heart on Repeat</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ──────────────── SECTION 9: PREGUNTAS FRECUENTES (FAQ Acordeón) ──────────────── */}
-      <section id="faq" className="w-full flex flex-col gap-8 scroll-mt-24">
-        <div className="flex flex-col gap-2 max-w-xl">
-          <span className="self-start bg-white/5 border border-white/10 text-white/40 text-[9px] font-mono tracking-[0.2em] px-3 py-1 rounded uppercase">
-            PREGUNTAS FRECUENTES
-          </span>
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-white uppercase tracking-tight">
-            Dudas <span className="text-[#C0392B]">Frecuentes.</span>
-          </h2>
-        </div>
-
-        <div className="flex flex-col gap-3 w-full max-w-3xl">
-          {faqs.map((f, i) => {
-            const isOpen = openFaq === i;
-            return (
-              <div key={i} className="border border-white/5 bg-neutral-950/20 backdrop-blur-md rounded-2xl overflow-hidden transition-all duration-300 hover:border-white/10">
-                <button 
-                  onClick={() => setOpenFaq(isOpen ? null : i)}
-                  className="w-full text-left p-5 flex items-center justify-between pointer-events-auto transition-colors duration-300 hover:bg-white/[0.01]"
-                >
-                  <span className="text-xs md:text-sm font-semibold text-white leading-normal font-sans">{f.q}</span>
-                  <span className="text-[#ff8080] text-xs transition-transform duration-300" style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}>
-                    ▼
-                  </span>
-                </button>
-                {isOpen && (
-                  <div className="px-5 pb-5 pt-0 text-xs text-white/50 leading-relaxed font-sans border-t border-white/5 pt-4 animate-[fu_0.2s_ease-out]">
-                    {f.a}
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* ──────────────── SECTION 10: CTA FINAL (Get In Touch) ──────────────── */}
+      {/* ──────────────── SECTION 8: CTA FINAL (Get In Touch) ──────────────── */}
       <section className="w-full">
         <div className="bg-gradient-to-br from-[#590707]/80 to-[#2a0303]/90 backdrop-blur-md border border-[#590707]/40 px-6 py-12 md:py-16 rounded-3xl text-center flex flex-col items-center relative overflow-hidden">
           <HudBracket />
@@ -332,15 +231,37 @@ export default function LandingView() {
             Construyamos tu carrera juntos
           </h2>
           <p className="text-xs md:text-sm text-white/60 leading-relaxed mb-8 max-w-md font-sans">
-            Completa el formulario y te armamos una propuesta personalizada con precios exactos. Sin compromisos.
+            Completa el formulario y te armamos una propuesta personalizada con precios exactos, o contáctanos de inmediato por nuestros canales directos.
           </p>
           
-          <button 
-            onClick={() => setPhase('form')}
-            className="bg-white hover:bg-white/90 text-[#590707] font-mono font-bold uppercase tracking-wider py-4 px-10 rounded-xl active:scale-95 shadow-[0_0_30px_rgba(255,255,255,0.25)] transition-all duration-300 pointer-events-auto text-xs animate-pulse"
-          >
-            Comenzar ahora →
-          </button>
+          <div className="flex flex-col sm:flex-row gap-4 w-full justify-center items-center max-w-lg">
+            <button 
+              onClick={() => setPhase('form')}
+              className="w-full sm:w-auto bg-white hover:bg-white/90 text-[#590707] font-mono font-bold uppercase tracking-wider py-4 px-8 rounded-xl active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.2)] transition-all duration-300 pointer-events-auto text-xs"
+            >
+              Comenzar ahora →
+            </button>
+            <a 
+              href="https://wa.me/573113143351"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto bg-[#1a8f3c] hover:bg-[#20a348] text-white font-mono font-bold uppercase tracking-wider py-4 px-6 rounded-xl active:scale-95 transition-all duration-300 pointer-events-auto text-xs flex items-center justify-center gap-2"
+            >
+              <span>💬</span> WhatsApp
+            </a>
+            <a 
+              href="mailto:clientes@kapitalmusic.co"
+              className="w-full sm:w-auto bg-white/10 hover:bg-white/15 border border-white/10 text-white font-mono font-bold uppercase tracking-wider py-4 px-6 rounded-xl active:scale-95 transition-all duration-300 pointer-events-auto text-xs flex items-center justify-center gap-2"
+            >
+              <span>📧</span> Email
+            </a>
+          </div>
+
+          <div className="mt-8 flex flex-col sm:flex-row gap-6 text-[10px] font-mono text-white/40 tracking-wider">
+            <div>WHATSAPP: <span className="text-white/80">+57 311 314 3351</span></div>
+            <div className="hidden sm:block">|</div>
+            <div>EMAIL: <span className="text-white/80">clientes@kapitalmusic.co</span></div>
+          </div>
         </div>
       </section>
 

@@ -40,7 +40,7 @@ export default function Ecosystem({ onServiceClick }) {
     {
       idx: 3,
       icon: "📲",
-      title: "Marketing 30",
+      title: "Marketing 360",
       tag: "CRECIMIENTO",
       subtitle: "Estrategia y pauta digital",
       desc: "Crecimiento de reproducciones y oyentes mensuales mediante campañas optimizadas de Meta Ads dirigidas a tu nicho en la música urbana.",
@@ -232,10 +232,9 @@ export default function Ecosystem({ onServiceClick }) {
 
           {/* Dynamic real photo gallery at the bottom */}
           <div className="mt-4 border-t border-white/5 pt-4">
-            <div className="text-[8px] font-mono text-white/30 tracking-widest uppercase mb-2">{"// Galería de fotos reales"}</div>
-            <div className="grid grid-cols-4 gap-2">
+            <div className="grid grid-cols-2 gap-3">
               {serviceImages[activeChannel]?.map((url, i) => (
-                <div key={i} className="aspect-square rounded-lg overflow-hidden border border-white/5 group/img hover:border-[#C0392B]/45 transition-all duration-300">
+                <div key={i} className="aspect-video rounded-xl overflow-hidden border border-white/5 group/img hover:border-[#C0392B]/45 transition-all duration-300">
                   <img 
                     src={url} 
                     alt={`servicios-${activeChannel}-${i}`} 

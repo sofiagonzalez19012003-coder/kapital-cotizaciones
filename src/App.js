@@ -100,7 +100,6 @@ export default function App() {
             <button onClick={() => handleNavClick('servicios')} className="hover:text-white transition-colors duration-200 uppercase">Servicios</button>
             <button onClick={() => handleNavClick('sobre-nosotros')} className="hover:text-white transition-colors duration-200 uppercase">Nosotros</button>
             <button onClick={() => handleNavClick('lanzamientos')} className="hover:text-white transition-colors duration-200 uppercase">Lanzamientos</button>
-            <button onClick={() => handleNavClick('faq')} className="hover:text-white transition-colors duration-200 uppercase">FAQ</button>
           </div>
 
           <div className="flex gap-4 items-center">

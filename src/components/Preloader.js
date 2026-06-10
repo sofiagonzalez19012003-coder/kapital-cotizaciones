@@ -97,8 +97,7 @@ export default function Preloader({ onDone }) {
 
       {/* Title */}
       <div className="text-center mb-8 relative z-10">
-        <div className="text-lg font-display font-black tracking-[0.4em] text-white">KAPITAL</div>
-        <div className="text-[10px] font-mono tracking-[0.45em] text-[#C0392B] mt-1.5 uppercase">Asesoría Personalizada</div>
+        <div className="text-lg font-display font-black tracking-[0.3em] text-white uppercase">KAPITAL MUSIC</div>
       </div>
 
       {/* Slim Minimalist Loading Progress Bar */}

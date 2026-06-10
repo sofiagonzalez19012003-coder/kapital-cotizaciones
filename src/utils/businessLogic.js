@@ -73,7 +73,7 @@ export function calcularPropuesta(serviciosElegidos, extras, esInternacional) {
   if (tiene("Alquiler de estudios")) {
     const est = extras.estudio || "A"; const p = PRECIOS.estudio[est];
     const sesiones = extras.sesionesEstudio || 1; const horas = extras.horasEstudio || p.minimoHoras;
-    const esPromo = sesiones > 3 || tiene("Marketing 30") || tiene("Asesoría legal") || esInternacional;
+    const esPromo = sesiones > 3 || tiene("Marketing 360") || tiene("Asesoría legal") || esInternacional;
     const precioIndividual = p.hora * horas * sesiones; // siempre sin promo
     const precioConPromo = (esPromo ? p.horaPromo : p.hora) * horas * sesiones;
     totalBase += precioIndividual; totalPromo += precioConPromo;
@@ -113,7 +113,7 @@ export function calcularPropuesta(serviciosElegidos, extras, esInternacional) {
   }
 
   if (tiene("Asesoría legal")) {
-    const esPromo = tiene("Marketing 30");
+    const esPromo = tiene("Marketing 360");
     const precioIndividual = PRECIOS.asesoria.base;
     const precioConPromo = esPromo ? PRECIOS.asesoria.promoConMarketing : PRECIOS.asesoria.base;
     totalBase += precioIndividual; totalPromo += precioConPromo;
@@ -125,19 +125,19 @@ export function calcularPropuesta(serviciosElegidos, extras, esInternacional) {
       totalConPromo: fmtFull(precioConPromo),
       totalConPromoNum: precioConPromo,
       promo: esPromo,
-      promoRazon: esPromo ? "combinado con Marketing 30" : null,
+      promoRazon: esPromo ? "combinado con Marketing 360" : null,
       precioUnitBase: fmt(PRECIOS.asesoria.base),
       precioUnitPromo: esPromo ? fmt(PRECIOS.asesoria.promoConMarketing) : null,
     });
   }
 
-  if (tiene("Marketing 30")) {
+  if (tiene("Marketing 360")) {
     const esPromo = tiene("Producción musical completa (incluye mezcla y master)") || tiene("Asesoría legal");
     const precioIndividual = PRECIOS.marketing.base;
     const precioConPromo = esPromo ? PRECIOS.marketing.promoConOtros : PRECIOS.marketing.base;
     totalBase += precioIndividual; totalPromo += precioConPromo;
     items.push({
-      nombre: "Marketing 30",
+      nombre: "Marketing 360",
       detalle: "Plan mensual completo",
       precioIndividual: fmtFull(precioIndividual),
       precioIndividualNum: precioIndividual,
@@ -208,13 +208,13 @@ export const QUESTIONS = [
   { id: "tiktok", label: "¿Cuál es tu usuario de TikTok?", type: "text", placeholder: "@tuusuario", required: false, section: "TUS REDES", conditional: (a) => a.seguidoresTT && a.seguidoresTT !== "No tengo TikTok" },
   { id: "contenidoActual", label: "¿Qué tan seguido publicas contenido?", type: "single", options: ["No publico", "Esporádicamente", "1-2 veces por semana", "Casi diario", "Tengo equipo de contenido"], required: true, section: "TUS REDES" },
   { id: "objetivos", label: "¿Cuáles son tus objetivos?", type: "multicheck", options: OBJETIVOS, required: true, hint: "Selecciona todos los que apliquen", section: "TUS OBJETIVOS" },
-  { id: "serviciosInteres", label: "¿Qué servicios de Kapital te interesan?", type: "multicheck", options: ["Alquiler de estudios", "Asesoría legal", "Mezcla & Mastering (ya tengo grabado)", "Marketing 30", "Producción musical completa (incluye mezcla y master)"], required: true, hint: "Selecciona todos los que necesitas. La producción musical ya incluye mezcla y master.", section: "TUS OBJETIVOS",
+  { id: "serviciosInteres", label: "¿Qué servicios de Kapital te interesan?", type: "multicheck", options: ["Alquiler de estudios", "Asesoría legal", "Mezcla & Mastering (ya tengo grabado)", "Marketing 360", "Producción musical completa (incluye mezcla y master)"], required: true, hint: "Selecciona todos los que necesitas. La producción musical ya incluye mezcla y master.", section: "TUS OBJETIVOS",
     filterOptions: (answers) => {
       const sel = answers.serviciosInteres || [];
       if (sel.includes("Producción musical completa (incluye mezcla y master)")) {
-        return ["Alquiler de estudios", "Asesoría legal", "Marketing 30", "Producción musical completa (incluye mezcla y master)"];
+        return ["Alquiler de estudios", "Asesoría legal", "Marketing 360", "Producción musical completa (incluye mezcla y master)"];
       }
-      return ["Alquiler de estudios", "Asesoría legal", "Mezcla & Mastering (ya tengo grabado)", "Marketing 30", "Producción musical completa (incluye mezcla y master)"];
+      return ["Alquiler de estudios", "Asesoría legal", "Mezcla & Mastering (ya tengo grabado)", "Marketing 360", "Producción musical completa (incluye mezcla y master)"];
     }
   },
   { id: "presupuesto", label: "¿Cuánto puedes invertir en tu carrera?", type: "single", options: ["$2,000,000 – $4,000,000", "$4,000,000 – $7,000,000", "$7,000,000 – $12,000,000", "$12,000,000 – $20,000,000", "Más de $20,000,000"], required: true, section: "TUS OBJETIVOS" },
@@ -317,7 +317,7 @@ export const SERVICES = [
     imgs: []
   },
   { icon: "🎚️", title: "Mezcla & Mastering", tag: "PRODUCCIÓN", descLanding: "¿Ya tienes todo grabado? Lo llevamos al nivel que merece.", desc: "¿Ya tienes tus temas grabados? Nuestros ingenieros los llevan al nivel internacional que merecen. Entrega en 72h.", imgs: [] },
-  { icon: "📲", title: "Marketing 30", tag: "CRECIMIENTO", descLanding: "Un mes completo de estrategia digital para que tu música llegue a quien tiene que llegar.", desc: "Análisis de contenido, crecimiento orgánico, pauta en Meta, parrilla mensual y asesoramiento de marca. Un mes completo de activación.", imgs: [] },
+  { icon: "📲", title: "Marketing 360", tag: "CRECIMIENTO", descLanding: "Un mes completo de estrategia digital para que tu música llegue a quien tiene que llegar.", desc: "Análisis de contenido, crecimiento orgánico, pauta en Meta, parrilla mensual y asesoramiento de marca. Un mes completo de activación.", imgs: [] },
   {
     icon: "🎵", title: "Producción Musical", tag: "CREACIÓN",
     descLanding: "TunyD y Money Makers. Desde el concepto hasta el master, todo incluido.",

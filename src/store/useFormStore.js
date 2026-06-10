@@ -266,13 +266,13 @@ export const useFormStore = create((set, get) => ({
     if (contenido.includes('Casi diario') || contenido.includes('equipo')) fortalezas.push('Tu disciplina con el contenido digital es una ventaja competitiva real.');
     if (fortalezas.length === 0) fortalezas.push('Tu decisión de buscar profesionalización en este momento es exactamente lo que diferencia a los artistas que crecen.');
 
-    const analisisServ = `Los servicios que elegiste — ${serviciosFiltrados.join(', ')} — no son un gasto, son una inversión en la estructura que tu carrera necesita.${serviciosFiltrados.includes('Asesoría legal') ? ' La asesoría legal es urgente: sin ella cualquier contrato o acuerdo puede costarte más de lo que ganaste.' : ''}${serviciosFiltrados.includes('Producción musical completa (incluye mezcla y master)') ? ' La producción con nuestros productores no es solo grabar — es crear el sonido que te posiciona internacionalmente.' : ''}${serviciosFiltrados.includes('Marketing 30') ? ' El Marketing 30 te da visibilidad real: orgánica y pagada, con estrategia y medición desde el día uno.' : ''} Kapital te acompaña en todo desde el primer día.`;
+    const analisisServ = `Los servicios que elegiste — ${serviciosFiltrados.join(', ')} — no son un gasto, son una inversión en la estructura que tu carrera necesita.${serviciosFiltrados.includes('Asesoría legal') ? ' La asesoría legal es urgente: sin ella cualquier contrato o acuerdo puede costarte más de lo que ganaste.' : ''}${serviciosFiltrados.includes('Producción musical completa (incluye mezcla y master)') ? ' La producción con nuestros productores no es solo grabar — es crear el sonido que te posiciona internacionalmente.' : ''}${serviciosFiltrados.includes('Marketing 360') ? ' El Marketing 360 te da visibilidad real: orgánica y pagada, con estrategia y medición desde el día uno.' : ''} Kapital te acompaña en todo desde el primer día.`;
 
     const pasos = [];
     if (registrado !== 'Sí') pasos.push('Registra tu música ante la DNDA y afíliate a SAYCO/ACINPRO. Nuestro servicio de Asesoría Legal lo resuelve en una sola sesión.');
     if (distribuidora === 'No tengo') pasos.push('Configura tu distribuidora digital. En la asesoría te orientamos según tu volumen de lanzamientos.');
     if (serviciosFiltrados.includes('Producción musical completa (incluye mezcla y master)')) pasos.push('Reserva tu sesión de producción — el proceso incluye concepto, grabación, mezcla y master.');
-    if (serviciosFiltrados.includes('Marketing 30')) pasos.push('Activar Marketing 30: análisis de presencia digital, pauta Meta y plan de crecimiento orgánico.');
+    if (serviciosFiltrados.includes('Marketing 360')) pasos.push('Activar Marketing 360: análisis de presencia digital, pauta Meta y plan de crecimiento orgánico.');
     if (serviciosFiltrados.includes('Alquiler de estudios')) pasos.push('Agenda tu sesión de estudio — te ayudamos a elegir entre Estudio A y B según tu proyecto.');
     pasos.push('Agenda una reunión con el equipo Kapital — es gratuita, sin compromiso, y en ella ajustamos todos los detalles.');
 
