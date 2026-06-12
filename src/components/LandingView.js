@@ -203,19 +203,19 @@ export default function LandingView() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
           <div className="bg-neutral-950/20 backdrop-blur-md border border-white/5 rounded-xl p-5 hover:border-white/10 transition-colors duration-300">
             <h4 className="text-xs font-display font-semibold text-[#ff8080] tracking-wider uppercase mb-2">Visión</h4>
-            <p className="text-[11px] text-white/50 leading-relaxed font-sans">Damos forma a tus ideas para que tu música se sienta intencional, duradera y potente.</p>
+            <p className="text-[11px] text-white/50 leading-relaxed font-sans">Le damos dirección a tus ideas para que tu música tenga identidad propia y suene con fuerza.</p>
           </div>
           <div className="bg-neutral-950/20 backdrop-blur-md border border-white/5 rounded-xl p-5 hover:border-white/10 transition-colors duration-300">
             <h4 className="text-xs font-display font-semibold text-[#ff8080] tracking-wider uppercase mb-2">Oficio</h4>
-            <p className="text-[11px] text-white/50 leading-relaxed font-sans">Desde el diseño sonoro al master final, trabajamos con precisión milimétrica en cada canal.</p>
+            <p className="text-[11px] text-white/50 leading-relaxed font-sans">Cuidamos cada detalle del proceso, desde el primer beat hasta el máster final para que tu sonido sea impecable.</p>
           </div>
           <div className="bg-neutral-950/20 backdrop-blur-md border border-white/5 rounded-xl p-5 hover:border-white/10 transition-colors duration-300">
             <h4 className="text-xs font-display font-semibold text-[#ff8080] tracking-wider uppercase mb-2">Confianza</h4>
-            <p className="text-[11px] text-white/50 leading-relaxed font-sans">Transparencia absoluta, plazos de entrega estrictos y compromisos cumplidos sin rodeos.</p>
+            <p className="text-[11px] text-white/50 leading-relaxed font-sans">Hablamos claro y sin rodeos. Cumplimos con los tiempos acordados y te acompañamos en todo el camino.</p>
           </div>
           <div className="bg-neutral-950/20 backdrop-blur-md border border-white/5 rounded-xl p-5 hover:border-white/10 transition-colors duration-300">
             <h4 className="text-xs font-display font-semibold text-[#ff8080] tracking-wider uppercase mb-2">Energía</h4>
-            <p className="text-[11px] text-white/50 leading-relaxed font-sans">Creamos producciones con impacto, diseñadas para transmitir vibración y conectar al instante.</p>
+            <p className="text-[11px] text-white/50 leading-relaxed font-sans">Producimos con toda la vibra. Hacemos música que transmita emociones reales y conecte de una con la gente.</p>
           </div>
         </div>
       </section>
