@@ -179,7 +179,7 @@ export default function LandingView() {
             Ecosistema <span className="text-[#C0392B]">Kapital Music.</span>
           </h2>
           <p className="text-xs md:text-sm text-white/55 font-sans leading-relaxed">
-            Manipula los faders de la consola en tiempo real para explorar el subtexto y ver la galería de imágenes reales de cada servicio técnico y creativo.
+            Manipula los faders de la consola en tiempo real para explorar los servicios
           </p>
         </div>
 
@@ -271,7 +271,9 @@ export default function LandingView() {
               <span>💬</span> WhatsApp
             </a>
             <a 
-              href="mailto:clientes@kapitalmusic.co"
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=clientes@kapitalmusic.co"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-full sm:w-auto bg-white/10 hover:bg-white/15 border border-white/10 text-white font-mono font-bold uppercase tracking-wider py-4 px-6 rounded-xl active:scale-95 transition-all duration-300 pointer-events-auto text-xs flex items-center justify-center gap-2"
             >
               <span>📧</span> Email

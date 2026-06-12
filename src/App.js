@@ -144,9 +144,8 @@ export default function App() {
           {phase === "proposal" && <ProposalView />}
         </main>
 
-        {/* Footer */}
         <footer className="py-6 border-t border-white/5 text-center text-[9px] text-white/15 tracking-widest pointer-events-auto">
-          KAPITAL MUSIC © {new Date().getFullYear()} — contacto@kapitalmusic.co
+          KAPITAL MUSIC © {new Date().getFullYear()} — clientes@kapitalmusic.co
         </footer>
       </div>
     </div>

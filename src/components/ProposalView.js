@@ -24,7 +24,7 @@ export default function ProposalView() {
   const nombre = answers.nombre || "artista";
   const waMsg = encodeURIComponent(`¡Hola ${nombre}! 👋 Soy del equipo de Kapital Music.\n\nVimos que completaste tu formulario y ya tenemos tu propuesta lista. Queremos conectar contigo personalmente para resolver todas tus dudas y mostrarte exactamente cómo podemos impulsar tu carrera.\n\n¿Cuándo tienes 20 minutos para una llamada rápida? 🎵\n\n— Equipo Kapital Music`);
   const waLink = `https://wa.me/${WA_NUMBER}?text=${waMsg}`;
-  const mailLink = 'https://mail.google.com/mail/?view=cm&to=contacto@kapitalmusic.co&su=' + encodeURIComponent('Propuesta — ' + nombre) + '&body=' + encodeURIComponent('Hola equipo Kapital,\n\nSoy ' + nombre + ' y acabo de ver mi propuesta.\n\nWhatsApp: ' + (answers.telefono || ''));
+  const mailLink = 'https://mail.google.com/mail/?view=cm&to=clientes@kapitalmusic.co&su=' + encodeURIComponent('Propuesta — ' + nombre) + '&body=' + encodeURIComponent('Hola equipo Kapital,\n\nSoy ' + nombre + ' y acabo de ver mi propuesta.\n\nWhatsApp: ' + (answers.telefono || ''));
 
   return (
     <div className="w-full max-w-lg mx-auto px-6 py-4 flex flex-col gap-6 pointer-events-auto animate-[fu_0.38s_ease-out]">
