@@ -10,7 +10,7 @@ export default function Ecosystem({ onServiceClick }) {
       title: "Alquiler de Estudios",
       tag: "GRABACIÓN",
       subtitle: "Estudios A y B de nivel élite",
-      desc: "Salas tratadas acústicamente con monitores de referencia Avantone Pro CLA-10 y Adam A77X, pre-amplificadores Manley y micrófonos Neumann.",
+      desc: "Dos salas equipadas con la mejor tecnología de alta gama para que grabes tu música con un sonido impecable. Haz clic para conocer los detalles de cada estudio.",
       faderValue: 80,
       tech: "HARDWARE: CLASS_A_PREAMP_APOLLO8",
       serviceIdx: 0
@@ -21,7 +21,7 @@ export default function Ecosystem({ onServiceClick }) {
       title: "Asesoría Legal",
       tag: "PROTECCIÓN",
       subtitle: "Derechos de autor y contratos",
-      desc: "Protección integral de tu catálogo. Registro en DNDA, afiliación a SAYCO/ACINPRO, recaudación de publishing internacional y redacción de Split Sheets y contratos comerciales.",
+      desc: "Protegemos tu patrimonio musical: registro de obras, contratos a tu medida y recaudación de regalías a nivel internacional. Haz clic para ver todo lo que incluye.",
       faderValue: 70,
       tech: "LEGAL: DNDA_COPYRIGHT_SECURE",
       serviceIdx: 1
@@ -32,7 +32,7 @@ export default function Ecosystem({ onServiceClick }) {
       title: "Mezcla & Mastering",
       tag: "SONIDO",
       subtitle: "Post-producción profesional",
-      desc: "Ingeniería de sonido avanzada para llevar tus pistas grabadas al estándar de Spotify y Apple Music en tiempo récord.",
+      desc: "Llevamos tus canciones grabadas al estándar de las plataformas digitales con nuestra mezcla y máster en 72 horas. Haz clic para conocer más.",
       faderValue: 75,
       tech: "PROCESSING: ANALOG_SUMMING_72H",
       serviceIdx: 2
@@ -43,7 +43,7 @@ export default function Ecosystem({ onServiceClick }) {
       title: "Marketing 360",
       tag: "CRECIMIENTO",
       subtitle: "Estrategia y pauta digital",
-      desc: "Crecimiento de reproducciones y oyentes mensuales mediante campañas optimizadas de Meta Ads dirigidas a tu nicho en la música urbana.",
+      desc: "Estrategia digital integral con pautas optimizadas de Meta Ads para hacer crecer tus reproducciones y oyentes mensuales. Haz clic para descubrir el plan.",
       faderValue: 85,
       tech: "ADS: FB_PIXEL_CONVERSION_ENGINE",
       serviceIdx: 3
@@ -54,7 +54,7 @@ export default function Ecosystem({ onServiceClick }) {
       title: "Producción Musical",
       tag: "CREACIÓN",
       subtitle: "Concepto y beats exclusivos",
-      desc: "Desarrollo artístico desde cero. Beats, arreglos y dirección ejecutiva con los productores TunyD y Money Makers.",
+      desc: "Desarrollo creativo completo de la mano de TunyD y Money Makers, desde la idea inicial y los beats hasta el máster final. Haz clic para conocer el proceso.",
       faderValue: 95,
       tech: "PRODUCTION: ELITE_ARRANGERS_KAPITAL",
       serviceIdx: 4
@@ -206,9 +206,6 @@ export default function Ecosystem({ onServiceClick }) {
 
         {/* Selected Channel Specifications Panel */}
         <div className="bg-white/5 border border-white/10 rounded-xl p-4 relative overflow-hidden transition-all duration-300">
-          <div className="absolute top-0 right-3 text-[7px] text-[#ff8080]/30 tracking-widest font-mono uppercase">
-            {channels[activeChannel].tech}
-          </div>
 
           <h3 className="font-mono font-black text-sm text-white uppercase tracking-wider mb-0.5">
             {channels[activeChannel].title}
