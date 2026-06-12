@@ -226,7 +226,7 @@ export default function LandingView() {
               <span className="w-1.5 h-1.5 rounded-full bg-[#C0392B]" />
               Confianza
             </h4>
-            <p className="text-[11px] text-white/60 leading-relaxed font-sans">Hablamos claro y sin rodeos. Cumplimos con los tiempos acordados y te acompañamos en todo el camino.</p>
+            <p className="text-[11px] text-white/60 leading-relaxed font-sans">Construimos bases sólidas para que protejas tus creaciones y te muevas con total seguridad.</p>
           </div>
 
           <div className="bg-gradient-to-br from-neutral-950/60 to-neutral-950/20 backdrop-blur-md border border-white/10 rounded-2xl p-6 shadow-xl hover:border-[#C0392B]/40 hover:shadow-[0_4px_25px_rgba(192,57,43,0.15)] transition-all duration-300 relative group overflow-hidden">
