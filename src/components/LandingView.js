@@ -235,7 +235,7 @@ export default function LandingView() {
               <span className="w-1.5 h-1.5 rounded-full bg-[#C0392B]" />
               Energía
             </h4>
-            <p className="text-[11px] text-white/60 leading-relaxed font-sans">Producimos con toda la vibra. Hacemos música que transmita emociones reales y conecte de una con la gente.</p>
+            <p className="text-[11px] text-white/60 leading-relaxed font-sans">El entorno que impulsará tu sueño.</p>
           </div>
 
         </div>
