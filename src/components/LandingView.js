@@ -201,22 +201,43 @@ export default function LandingView() {
       {/* ──────────────── SECTION 7: VALORES (Bento de Valores) ──────────────── */}
       <section className="w-full flex flex-col gap-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
-          <div className="bg-neutral-950/20 backdrop-blur-md border border-white/5 rounded-xl p-5 hover:border-white/10 transition-colors duration-300">
-            <h4 className="text-xs font-display font-semibold text-[#ff8080] tracking-wider uppercase mb-2">Visión</h4>
-            <p className="text-[11px] text-white/50 leading-relaxed font-sans">Le damos dirección a tus ideas para que tu música tenga identidad propia y suene con fuerza.</p>
+          
+          <div className="bg-gradient-to-br from-neutral-950/60 to-neutral-950/20 backdrop-blur-md border border-white/10 rounded-2xl p-6 shadow-xl hover:border-[#C0392B]/40 hover:shadow-[0_4px_25px_rgba(192,57,43,0.15)] transition-all duration-300 relative group overflow-hidden">
+            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#C0392B]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <h4 className="text-xs font-display font-bold text-white/90 tracking-widest uppercase mb-3 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#C0392B]" />
+              Visión
+            </h4>
+            <p className="text-[11px] text-white/60 leading-relaxed font-sans">Le damos dirección a tus ideas para que tu música tenga identidad propia y suene con fuerza.</p>
           </div>
-          <div className="bg-neutral-950/20 backdrop-blur-md border border-white/5 rounded-xl p-5 hover:border-white/10 transition-colors duration-300">
-            <h4 className="text-xs font-display font-semibold text-[#ff8080] tracking-wider uppercase mb-2">Oficio</h4>
-            <p className="text-[11px] text-white/50 leading-relaxed font-sans">Cuidamos cada detalle del proceso, desde el primer beat hasta el máster final para que tu sonido sea impecable.</p>
+
+          <div className="bg-gradient-to-br from-neutral-950/60 to-neutral-950/20 backdrop-blur-md border border-white/10 rounded-2xl p-6 shadow-xl hover:border-[#C0392B]/40 hover:shadow-[0_4px_25px_rgba(192,57,43,0.15)] transition-all duration-300 relative group overflow-hidden">
+            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#C0392B]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <h4 className="text-xs font-display font-bold text-white/90 tracking-widest uppercase mb-3 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#C0392B]" />
+              Oficio
+            </h4>
+            <p className="text-[11px] text-white/60 leading-relaxed font-sans">Cuidamos cada detalle del proceso, desde el primer beat hasta el máster final para que tu sonido sea impecable.</p>
           </div>
-          <div className="bg-neutral-950/20 backdrop-blur-md border border-white/5 rounded-xl p-5 hover:border-white/10 transition-colors duration-300">
-            <h4 className="text-xs font-display font-semibold text-[#ff8080] tracking-wider uppercase mb-2">Confianza</h4>
-            <p className="text-[11px] text-white/50 leading-relaxed font-sans">Hablamos claro y sin rodeos. Cumplimos con los tiempos acordados y te acompañamos en todo el camino.</p>
+
+          <div className="bg-gradient-to-br from-neutral-950/60 to-neutral-950/20 backdrop-blur-md border border-white/10 rounded-2xl p-6 shadow-xl hover:border-[#C0392B]/40 hover:shadow-[0_4px_25px_rgba(192,57,43,0.15)] transition-all duration-300 relative group overflow-hidden">
+            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#C0392B]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <h4 className="text-xs font-display font-bold text-white/90 tracking-widest uppercase mb-3 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#C0392B]" />
+              Confianza
+            </h4>
+            <p className="text-[11px] text-white/60 leading-relaxed font-sans">Hablamos claro y sin rodeos. Cumplimos con los tiempos acordados y te acompañamos en todo el camino.</p>
           </div>
-          <div className="bg-neutral-950/20 backdrop-blur-md border border-white/5 rounded-xl p-5 hover:border-white/10 transition-colors duration-300">
-            <h4 className="text-xs font-display font-semibold text-[#ff8080] tracking-wider uppercase mb-2">Energía</h4>
-            <p className="text-[11px] text-white/50 leading-relaxed font-sans">Producimos con toda la vibra. Hacemos música que transmita emociones reales y conecte de una con la gente.</p>
+
+          <div className="bg-gradient-to-br from-neutral-950/60 to-neutral-950/20 backdrop-blur-md border border-white/10 rounded-2xl p-6 shadow-xl hover:border-[#C0392B]/40 hover:shadow-[0_4px_25px_rgba(192,57,43,0.15)] transition-all duration-300 relative group overflow-hidden">
+            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#C0392B]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <h4 className="text-xs font-display font-bold text-white/90 tracking-widest uppercase mb-3 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#C0392B]" />
+              Energía
+            </h4>
+            <p className="text-[11px] text-white/60 leading-relaxed font-sans">Producimos con toda la vibra. Hacemos música que transmita emociones reales y conecte de una con la gente.</p>
           </div>
+
         </div>
       </section>
 
