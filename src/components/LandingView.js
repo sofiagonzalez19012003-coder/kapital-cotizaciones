@@ -202,19 +202,19 @@ export default function LandingView() {
       <section className="w-full flex flex-col gap-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
           <div className="bg-neutral-950/20 backdrop-blur-md border border-white/5 rounded-xl p-5 hover:border-white/10 transition-colors duration-300">
-            <h4 className="text-xs font-display font-semibold text-[#ff8080] tracking-wider uppercase mb-2">Vision</h4>
+            <h4 className="text-xs font-display font-semibold text-[#ff8080] tracking-wider uppercase mb-2">Visión</h4>
             <p className="text-[11px] text-white/50 leading-relaxed font-sans">Damos forma a tus ideas para que tu música se sienta intencional, duradera y potente.</p>
           </div>
           <div className="bg-neutral-950/20 backdrop-blur-md border border-white/5 rounded-xl p-5 hover:border-white/10 transition-colors duration-300">
-            <h4 className="text-xs font-display font-semibold text-[#ff8080] tracking-wider uppercase mb-2">Craft</h4>
+            <h4 className="text-xs font-display font-semibold text-[#ff8080] tracking-wider uppercase mb-2">Oficio</h4>
             <p className="text-[11px] text-white/50 leading-relaxed font-sans">Desde el diseño sonoro al master final, trabajamos con precisión milimétrica en cada canal.</p>
           </div>
           <div className="bg-neutral-950/20 backdrop-blur-md border border-white/5 rounded-xl p-5 hover:border-white/10 transition-colors duration-300">
-            <h4 className="text-xs font-display font-semibold text-[#ff8080] tracking-wider uppercase mb-2">Trust</h4>
+            <h4 className="text-xs font-display font-semibold text-[#ff8080] tracking-wider uppercase mb-2">Confianza</h4>
             <p className="text-[11px] text-white/50 leading-relaxed font-sans">Transparencia absoluta, plazos de entrega estrictos y compromisos cumplidos sin rodeos.</p>
           </div>
           <div className="bg-neutral-950/20 backdrop-blur-md border border-white/5 rounded-xl p-5 hover:border-white/10 transition-colors duration-300">
-            <h4 className="text-xs font-display font-semibold text-[#ff8080] tracking-wider uppercase mb-2">Energy</h4>
+            <h4 className="text-xs font-display font-semibold text-[#ff8080] tracking-wider uppercase mb-2">Energía</h4>
             <p className="text-[11px] text-white/50 leading-relaxed font-sans">Creamos producciones con impacto, diseñadas para transmitir vibración y conectar al instante.</p>
           </div>
         </div>
