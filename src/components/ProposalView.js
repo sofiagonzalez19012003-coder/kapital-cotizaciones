@@ -16,6 +16,7 @@ export default function ProposalView() {
   if (!proposal || !cotizacion) return null;
 
   const esIntl = answers.ciudad ? !esColombiano(answers.ciudad) : false;
+  const tieneMarketing = cotizacion.items.some(item => item.nombre === "Marketing 360");
 
   const nivelColor = { COMENZANDO: "#ff8080", CRECIENDO: "#CDC7BD", ESTABLECIDO: "#6be8a0" };
   const nivelBg = { COMENZANDO: "rgba(89,7,7,.22)", CRECIENDO: "rgba(115,109,102,.18)", ESTABLECIDO: "rgba(26,143,60,.18)" };
@@ -254,6 +255,26 @@ export default function ProposalView() {
           </div>
         )}
       </div>
+
+      {tieneMarketing && (
+        <div className="bg-gradient-to-br from-[#1a5090]/20 to-black/80 border border-[#1a5090]/30 rounded-2xl p-6 flex flex-col gap-4">
+          <span className="self-start bg-[#1a5090]/20 border border-[#1a5090]/50 text-[#90b8ff] text-[9px] font-black tracking-widest px-2.5 py-1 rounded uppercase">
+            ACCESO PLATAFORMA
+          </span>
+          <h3 className="text-base font-black text-white">Tu panel de Marketing 360° está listo</h3>
+          <p className="text-xs text-white/60 leading-relaxed">
+            Como parte de tu cotización, tienes habilitado el acceso al Marketing Engine para auditar tus redes, analizar tu contenido y simular tus pautas.
+          </p>
+          <a 
+            href="/marketing/index.html" 
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-gradient-to-r from-[#1a5090] to-[#0f3860] hover:from-[#2161ac] hover:to-[#124577] text-white font-extrabold uppercase text-center tracking-wider py-4 rounded-xl text-xs transition-all pointer-events-auto no-underline border border-white/5"
+          >
+            Acceder al Marketing Engine →
+          </a>
+        </div>
+      )}
 
       {/* Final message */}
       <div className="bg-gradient-to-r from-[#590707] to-[#2a0303] rounded-2xl p-6 text-center">

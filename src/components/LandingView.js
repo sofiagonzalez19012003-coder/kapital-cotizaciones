@@ -189,7 +189,14 @@ export default function LandingView() {
           <p className="text-[9px] text-[#ff8080] font-mono mb-6 uppercase text-center tracking-widest">
             {"// Faders verticales activos — Selecciona tu canal"}
           </p>
-          <Ecosystem onServiceClick={(idx) => { setActiveSrv(idx); setPhase('services'); }} />
+          <Ecosystem onServiceClick={(idx) => {
+            if (idx === 3) {
+              window.open('/marketing/index.html', '_blank');
+            } else {
+              setActiveSrv(idx);
+              setPhase('services');
+            }
+          }} />
         </div>
       </section>
 

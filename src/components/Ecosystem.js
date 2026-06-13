@@ -217,15 +217,31 @@ export default function Ecosystem({ onServiceClick }) {
             {channels[activeChannel].desc}
           </p>
 
-          <button 
-            onClick={() => onServiceClick(channels[activeChannel].serviceIdx)}
-            className="inline-flex items-center gap-2 bg-[#590707]/30 hover:bg-[#C0392B]/35 border border-[#C0392B]/50 rounded-lg px-3.5 py-2 mb-4 transition-all duration-300 pointer-events-auto"
-          >
-            <span className="text-[8.5px] font-mono font-bold text-[#ff8080] tracking-widest uppercase">
-              VER_DETALLES_SERVICIO
-            </span>
-            <span className="text-[8.5px] text-[#ff8080]">→</span>
-          </button>
+          <div className="flex flex-wrap gap-2.5 mb-4">
+            <button 
+              onClick={() => onServiceClick(channels[activeChannel].serviceIdx)}
+              className="inline-flex items-center gap-2 bg-[#590707]/30 hover:bg-[#C0392B]/35 border border-[#C0392B]/50 rounded-lg px-3.5 py-2 transition-all duration-300 pointer-events-auto"
+            >
+              <span className="text-[8.5px] font-mono font-bold text-[#ff8080] tracking-widest uppercase">
+                VER_DETALLES_SERVICIO
+              </span>
+              <span className="text-[8.5px] text-[#ff8080]">→</span>
+            </button>
+            
+            {activeChannel === 3 && (
+              <a 
+                href="/marketing/index.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-[#1a5090]/30 hover:bg-[#2161ac]/35 border border-[#2161ac]/50 rounded-lg px-3.5 py-2 transition-all duration-300 pointer-events-auto no-underline"
+              >
+                <span className="text-[8.5px] font-mono font-bold text-[#90b8ff] tracking-widest uppercase">
+                  INGRESAR_AL_ENGINE
+                </span>
+                <span className="text-[8.5px] text-[#90b8ff]">→</span>
+              </a>
+            )}
+          </div>
 
           {/* Dynamic real photo gallery at the bottom */}
           <div className="mt-4 border-t border-white/5 pt-4">

@@ -28,7 +28,13 @@ export default function ServicesView() {
                 className={`w-full text-left p-5 flex items-center justify-between transition-colors pointer-events-auto ${
                   isOpen ? 'bg-[#590707]/15 border-b border-[#590707]/20' : 'hover:bg-white/10'
                 }`}
-                onClick={() => setActiveSrv(isOpen ? null : i)}
+                onClick={() => {
+                  if (s.title === "Marketing 360") {
+                    window.open('/marketing/index.html', '_blank');
+                  } else {
+                    setActiveSrv(isOpen ? null : i);
+                  }
+                }}
               >
                 <div className="flex items-center gap-4">
                   <span className="text-2xl leading-none">{s.icon}</span>
@@ -126,6 +132,17 @@ export default function ServicesView() {
                   >
                     Solicitar cotización →
                   </button>
+
+                  {s.title === "Marketing 360" && (
+                    <a 
+                      href="/marketing/index.html"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full text-center mt-2 bg-gradient-to-r from-[#1a5090] to-[#0f3860] hover:from-[#2161ac] hover:to-[#124577] text-white font-extrabold uppercase tracking-wider py-3.5 rounded-xl text-[10px] active:scale-95 transition-all duration-300 pointer-events-auto block no-underline border border-white/5"
+                    >
+                      Ingresar al Marketing Engine 360° →
+                    </a>
+                  )}
                 </div>
               )}
             </div>
