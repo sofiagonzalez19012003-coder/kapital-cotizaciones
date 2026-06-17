@@ -191,7 +191,7 @@ export default function LandingView() {
           </p>
           <Ecosystem onServiceClick={(idx) => {
             if (idx === 3) {
-              window.open('/marketing/index.html', '_blank');
+              window.open('https://marketing-engine-six.vercel.app/', '_blank');
             } else {
               setActiveSrv(idx);
               setPhase('services');

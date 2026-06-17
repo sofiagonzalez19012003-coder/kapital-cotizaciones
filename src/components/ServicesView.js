@@ -30,7 +30,7 @@ export default function ServicesView() {
                 }`}
                 onClick={() => {
                   if (s.title === "Marketing 360") {
-                    window.open('/marketing/index.html', '_blank');
+                    window.open('https://marketing-engine-six.vercel.app/', '_blank');
                   } else {
                     setActiveSrv(isOpen ? null : i);
                   }
@@ -135,7 +135,7 @@ export default function ServicesView() {
 
                   {s.title === "Marketing 360" && (
                     <a 
-                      href="/marketing/index.html"
+                      href="https://marketing-engine-six.vercel.app/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-full text-center mt-2 bg-gradient-to-r from-[#1a5090] to-[#0f3860] hover:from-[#2161ac] hover:to-[#124577] text-white font-extrabold uppercase tracking-wider py-3.5 rounded-xl text-[10px] active:scale-95 transition-all duration-300 pointer-events-auto block no-underline border border-white/5"

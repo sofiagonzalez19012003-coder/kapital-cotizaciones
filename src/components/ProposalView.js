@@ -17,6 +17,7 @@ export default function ProposalView() {
 
   const esIntl = answers.ciudad ? !esColombiano(answers.ciudad) : false;
   const tieneMarketing = cotizacion.items.some(item => item.nombre === "Marketing 360");
+  const isPromo15Days = sessionStorage.getItem('promo_15days') === 'true';
 
   const nivelColor = { COMENZANDO: "#ff8080", CRECIENDO: "#CDC7BD", ESTABLECIDO: "#6be8a0" };
   const nivelBg = { COMENZANDO: "rgba(89,7,7,.22)", CRECIENDO: "rgba(115,109,102,.18)", ESTABLECIDO: "rgba(26,143,60,.18)" };
@@ -30,6 +31,17 @@ export default function ProposalView() {
   return (
     <div className="w-full max-w-lg mx-auto px-6 py-4 flex flex-col gap-6 pointer-events-auto animate-[fu_0.38s_ease-out]">
       
+      {isPromo15Days && (
+        <div className="relative overflow-hidden bg-emerald-500/10 border border-emerald-500/30 rounded-2xl p-5 text-center backdrop-blur-md animate-[fu_0.38s_ease-out]">
+          <div className="text-sm font-black text-emerald-400 mb-1">
+            🎉 ¡Beneficio de 15 días gratis activado!
+          </div>
+          <div className="text-xs text-white/70 leading-relaxed">
+            Nos pondremos en contacto contigo para darte el ingreso a la web.
+          </div>
+        </div>
+      )}
+
       {/* Welcome Card */}
       <div className="relative bg-gradient-to-br from-[#590707] to-[#0d0d0d] border border-[#590707]/30 rounded-3xl p-7 overflow-hidden">
         <div className="absolute -top-10 -right-10 w-36 h-36 rounded-full bg-white/[0.02] pointer-events-none" />
@@ -266,7 +278,7 @@ export default function ProposalView() {
             Como parte de tu cotización, tienes habilitado el acceso al Marketing Engine para auditar tus redes, analizar tu contenido y simular tus pautas.
           </p>
           <a 
-            href="/marketing/index.html" 
+            href="https://marketing-engine-six.vercel.app/" 
             target="_blank"
             rel="noopener noreferrer"
             className="bg-gradient-to-r from-[#1a5090] to-[#0f3860] hover:from-[#2161ac] hover:to-[#124577] text-white font-extrabold uppercase text-center tracking-wider py-4 rounded-xl text-xs transition-all pointer-events-auto no-underline border border-white/5"

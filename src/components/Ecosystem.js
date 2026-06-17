@@ -230,7 +230,7 @@ export default function Ecosystem({ onServiceClick }) {
             
             {activeChannel === 3 && (
               <a 
-                href="/marketing/index.html"
+                href="https://marketing-engine-six.vercel.app/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-[#1a5090]/30 hover:bg-[#2161ac]/35 border border-[#2161ac]/50 rounded-lg px-3.5 py-2 transition-all duration-300 pointer-events-auto no-underline"
