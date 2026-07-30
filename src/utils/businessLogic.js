@@ -1,5 +1,19 @@
 export const SHEETS_URL = "https://script.google.com/macros/s/AKfycbzU-SX_AGIPzqYCdigD5ZS3uj94uOH-GghfEz6KREVkqCSs1bzBMZlP4oFqLOz2Dfb0CQ/exec";
+export const SHEETS_URL_TRIAL = "https://script.google.com/macros/s/AKfycbyYOrS_-CNjI_SQVTLIfV6mlfxageh3AfWA57Ks_im7TErXYY9rRubkYjUMohyKPflY3Q/exec";
 export const WA_NUMBER = "573113143351";
+
+export async function guardarPostulacionFreeTrial(payload) {
+  try {
+    await fetch(SHEETS_URL_TRIAL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+  } catch (err) {
+    console.error("Sheets trial error:", err);
+  }
+}
 
 export async function guardarEnSheets(answers, extras, cotizacion) {
   const fecha = new Date().toLocaleString("es-CO", { timeZone: "America/Bogota" });

@@ -7,6 +7,7 @@ import FormExtras from './components/FormExtras';
 import LandingView from './components/LandingView';
 import ServicesView from './components/ServicesView';
 import ProposalView from './components/ProposalView';
+import FreeTrialForm from './components/FreeTrialForm';
 import { LOGO_NAV } from './utils/businessLogic';
 
 export default function App() {
@@ -131,6 +132,7 @@ export default function App() {
           {phase === "landing" && <LandingView />}
           {phase === "services" && <ServicesView />}
           {phase === "form" && <FormCard />}
+          {phase === "freeTrial" && <FreeTrialForm />}
           {phase === "extras" && <FormExtras />}
           
           {phase === "loading" && (

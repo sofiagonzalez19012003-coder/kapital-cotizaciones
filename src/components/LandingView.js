@@ -47,13 +47,24 @@ export default function LandingView() {
             Somos el equipo que te acompaña a construir una carrera real — estrategia, producción y respaldo legal desde el día uno.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center items-center sm:items-start">
             <button 
               onClick={() => setPhase('form')}
               className="bg-[#C0392B] hover:bg-[#8a0c0c] text-white font-mono font-bold uppercase tracking-wider py-4 px-8 rounded-xl shadow-[0_0_20px_rgba(192,57,43,0.3)] active:scale-95 transition-all duration-300 pointer-events-auto text-xs"
             >
               Quiero mi propuesta →
             </button>
+            <div className="flex flex-col items-center">
+              <button 
+                onClick={() => setPhase('freeTrial')}
+                className="bg-white hover:bg-neutral-200 text-black font-mono font-bold uppercase tracking-wider py-4 px-8 rounded-xl shadow-[0_0_20px_rgba(255,255,255,0.2)] active:scale-95 transition-all duration-300 pointer-events-auto text-xs w-full sm:w-auto text-center"
+              >
+                POSTÚLATE AL FREE TRIAL →
+              </button>
+              <div className="text-[9px] font-mono text-white/30 tracking-widest mt-2 uppercase">
+                {"// 10 CUPOS DISPONIBLES"}
+              </div>
+            </div>
             <button 
               onClick={scrollToServices}
               className="bg-transparent hover:bg-white/5 border border-white/10 hover:border-white/20 text-white font-mono font-bold uppercase tracking-wider py-4 px-8 rounded-xl active:scale-95 transition-all duration-300 pointer-events-auto text-xs"
