@@ -56,7 +56,7 @@ export default function LandingView() {
             </button>
             <div className="flex flex-col items-center">
               <button 
-                onClick={() => setPhase('freeTrial')}
+                onClick={() => window.open('https://marketing-engine-six.vercel.app/', '_blank')}
                 className="bg-white hover:bg-neutral-200 text-black font-mono font-bold uppercase tracking-wider py-4 px-8 rounded-xl shadow-[0_0_20px_rgba(255,255,255,0.2)] active:scale-95 transition-all duration-300 pointer-events-auto text-xs w-full sm:w-auto text-center"
               >
                 POSTÚLATE AL FREE TRIAL →
